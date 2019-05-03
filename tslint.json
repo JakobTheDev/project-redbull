@@ -1,0 +1,46 @@
+{
+    "rulesDirectory": ["node_modules/codelyzer"],
+    "extends": ["rxjs-tslint-rules", "angular-tslint-rules", "tslint-config-prettier"],
+    "rules": {
+        "directive-selector": ["attribute", "redbull", "camelCase"],
+        "pipe-naming": [false],
+        "component-selector": ["element", "redbull", "kebab-case"],
+        "newline-before-return": false,
+        "no-null-keyword": false,
+        "max-line-length": false,
+        "no-inferrable-types": false,
+        "no-invalid-this": true,
+        "no-magic-numbers": true,
+        "no-empty": false,
+        "no-implicit-dependencies": false,
+        "prefer-object-spread": false,
+        "prefer-function-over-method": false,
+        "curly": false,
+        "typedef": [true, "call-signature", "parameter", "arrow-parameter", "property-declaration", "variable-declaration", "member-variable-declaration"],
+        "indent": [true, "spaces", 4],
+        "align": [false],
+        "no-unnecessary-class": false,
+        "import-blacklist": [true, "rxjs/Observable", "rxjs/Subject", "rxjs/add/*"],
+        "trackBy-function": { "severity": "warning" },
+        "only-arrow-functions": false,
+        "rxjs-finnish": {
+            "options": [
+                {
+                    "functions": false,
+                    "methods": false,
+                    "parameters": false,
+                    "properties": false,
+                    "variables": true
+                }
+            ],
+            "severity": "error"
+        },
+        "i18n": false,
+        "no-object-literal-type-assertion": false,
+        "no-floating-promises": false,
+        "no-parameter-reassignment": false,
+        "quotemark": [true, "single"],
+        "no-import-side-effect": false,
+        "no-template-call-expression": false
+    }
+}

@@ -1,0 +1,33 @@
+<div class="main-container">
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <!-- Branding -->
+        <div class="branding">
+            <a routerLink="/">
+                <clr-icon shape="bullseye"></clr-icon>
+                <span>Project Redbull</span>
+            </a>
+        </div>
+
+        <!-- Window controls -->
+        <div class="controls">
+            <div (click)="onClickMin()">
+                <clr-icon shape="window-min"></clr-icon>
+            </div>
+            <div *ngIf="!isMaximized()" (click)="onClickMax()">
+                <clr-icon shape="window-max"></clr-icon>
+            </div>
+            <div *ngIf="isMaximized()" (click)="onClickRestore()">
+                <clr-icon shape="window-restore"></clr-icon>
+            </div>
+            <div (click)="onClickClose()">
+                <clr-icon shape="window-close"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

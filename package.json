@@ -1,0 +1,139 @@
+{
+    "name": "redbull",
+    "version": "0.0.1",
+    "description": "Project RedBull - A companion for penetration testers and bug bounty hunters.",
+    "homepage": "https://github.com/JakobRPennington/RedBull",
+    "author": {
+        "name": "Jakob Pennington",
+        "email": "jakob@pennington.io"
+    },
+    "keywords": [
+        "Penetration Test",
+        "Bug Bounty",
+        "Note Taking",
+        "Evidence Collection",
+        "Methodology"
+    ],
+    "main": "main.js",
+    "private": true,
+    "scripts": {
+        "postinstall": "npm run postinstall:electron && electron-builder install-app-deps",
+        "postinstall:web": "node postinstall-web",
+        "postinstall:electron": "node postinstall",
+        "ng": "ng",
+        "start": "npm run postinstall:electron && npm-run-all -p ng:serve electron:serve",
+        "build": "npm run postinstall:electron && npm run electron:serve-tsc && ng build",
+        "build:dev": "npm run build -- -c dev",
+        "build:prod": "npm run build -- -c production",
+        "lint": "tslint --format stylish --project ./",
+        "lint:vscode": "tslint --format verbose --project ./",
+        "lint:prod": "tslint --format vso --project ./",
+        "ng:serve": "ng serve",
+        "ng:serve:web": "npm run postinstall:web && ng serve -o",
+        "electron:serve-tsc": "tsc -p tsconfig-serve.json",
+        "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron . --serve",
+        "electron:local": "npm run build:prod && electron .",
+        "electron:linux": "npm run build:prod && electron-builder build --linux",
+        "electron:windows": "npm run build:prod && electron-builder build --windows",
+        "electron:mac": "npm run build:prod && electron-builder build --mac",
+        "test": "npm run postinstall:web && ng test",
+        "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts",
+        "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+        "commit": "git-cz",
+        "precommit": "lint-staged"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "0.12.1",
+        "@angular/cli": "7.3.3",
+        "@angular/common": "7.2.7",
+        "@angular/compiler": "7.2.7",
+        "@angular/compiler-cli": "7.2.7",
+        "@angular/core": "7.2.7",
+        "@angular/forms": "7.2.7",
+        "@angular/http": "7.2.7",
+        "@angular/language-service": "7.2.7",
+        "@angular/platform-browser": "7.2.7",
+        "@angular/platform-browser-dynamic": "7.2.7",
+        "@angular/router": "7.2.7",
+        "@ngx-translate/core": "11.0.1",
+        "@ngx-translate/http-loader": "4.0.0",
+        "@types/jasmine": "2.8.7",
+        "@types/jasminewd2": "2.0.3",
+        "@types/mocha": "^5.2.6",
+        "@types/node": "8.9.4",
+        "angular-tslint-rules": "^1.14.0",
+        "chai": "^4.2.0",
+        "codelyzer": "4.5.0",
+        "commitizen": "^3.1.1",
+        "conventional-changelog-cli": "2.0.11",
+        "core-js": "2.6.1",
+        "cz-conventional-changelog": "^2.1.0",
+        "electron": "^5.0.0",
+        "electron-builder": "20.36.2",
+        "electron-reload": "1.3.0",
+        "husky": "^1.3.1",
+        "jasmine-core": "3.3.0",
+        "jasmine-spec-reporter": "4.2.1",
+        "karma": "3.1.1",
+        "karma-chrome-launcher": "2.2.0",
+        "karma-coverage-istanbul-reporter": "2.0.4",
+        "karma-jasmine": "2.0.1",
+        "karma-jasmine-html-reporter": "1.4.0",
+        "lint-staged": "^8.1.5",
+        "mocha": "6.0.2",
+        "npm-run-all": "4.1.5",
+        "prettier": "^1.17.0",
+        "rxjs": "6.4.0",
+        "rxjs-tslint-rules": "^4.22.1",
+        "spectron": "5.0.0",
+        "stylelint": "^10.0.1",
+        "stylelint-config-prettier": "^5.1.0",
+        "stylelint-scss": "^3.6.0",
+        "ts-node": "7.0.1",
+        "tslint": "^5.11.0",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "3.2.4",
+        "validate-commit-msg": "^2.14.0",
+        "wait-on": "3.2.0",
+        "webdriver-manager": "12.1.0",
+        "zone.js": "0.8.29"
+    },
+    "lint-staged": {
+        "*.{json,js,html}": [
+            "prettier --write",
+            "git add"
+        ],
+        "*.ts": [
+            "prettier --write",
+            "tslint --format codeFrame --project ./",
+            "git add"
+        ],
+        "*.scss": [
+            "prettier --write",
+            "stylelint --syntax=scss",
+            "git add"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "node_modules/cz-conventional-changelog"
+        },
+        "validate-commit-msg": {
+            "types": "conventional-commit-types",
+            "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+        }
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "validate-commit-msg",
+            "pre-commit": "lint-staged"
+        }
+    },
+    "dependencies": {
+        "@angular/animations": "^7.2.14",
+        "@clr/angular": "^1.1.3",
+        "@clr/icons": "^1.1.3",
+        "@clr/ui": "^1.1.3",
+        "@webcomponents/custom-elements": "^1.0.0"
+    }
+}
