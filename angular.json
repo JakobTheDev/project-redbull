@@ -17,8 +17,11 @@
                         "tsConfig": "src/tsconfig.app.json",
                         "polyfills": "src/polyfills.ts",
                         "assets": ["src/assets", "src/favicon.ico", "src/favicon.png", "src/favicon.icns", "src/favicon.256x256.png", "src/favicon.512x512.png"],
-                        "styles": ["src/styles.scss"],
-                        "scripts": []
+                        "styles": ["node_modules/@clr/icons/clr-icons.min.css", "node_modules/@clr/ui/clr-ui-dark.min.css", "src/styles.scss"],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["src/app/shared/styles"]
+                        },
+                        "scripts": ["node_modules/@webcomponents/custom-elements/custom-elements.min.js", "node_modules/@clr/icons/clr-icons.min.js"]
                     },
                     "configurations": {
                         "dev": {
@@ -93,19 +96,6 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "redbull-e2e": {
-            "root": "e2e",
-            "projectType": "application",
-            "architect": {
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": ["e2e/tsconfig.e2e.json"],
                         "exclude": ["**/node_modules/**"]
                     }
                 }

@@ -40,6 +40,7 @@
         "no-floating-promises": false,
         "no-parameter-reassignment": false,
         "quotemark": [true, "single"],
-        "no-import-side-effect": false
+        "no-import-side-effect": false,
+        "no-template-call-expression": false
     }
 }

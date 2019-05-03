@@ -2,15 +2,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { ClarityModule } from '@clr/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import 'reflect-metadata';
-import '../polyfills';
+import { WebviewDirective } from 'app/shared/directives/webview.directive';
+import { ElectronService } from 'app/shared/services/electron.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { WebviewDirective } from './directives/webview.directive';
-import { ElectronService } from './providers/electron.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -18,11 +16,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-    declarations: [AppComponent, HomeComponent, WebviewDirective],
+    declarations: [AppComponent, WebviewDirective],
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
+        ClarityModule,
         AppRoutingModule,
         TranslateModule.forRoot({
             loader: {

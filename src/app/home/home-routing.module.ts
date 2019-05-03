@@ -5,16 +5,12 @@ import { HomeComponent } from 'app/home/containers/home/home.component';
 const routes: Routes = [
     {
         path: '',
-        loadChildren: 'app/home/home.module#HomeModule'
-    },
-    {
-        path: '**',
-        redirectTo: ''
+        component: HomeComponent
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, { useHash: true })],
+    imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class HomeRoutingModule {}

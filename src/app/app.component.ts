@@ -1,13 +1,31 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { ElectronService } from 'app/shared/services/electron.service';
 
 @Component({
-    selector: 'app-root',
+    selector: 'redbull-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    constructor(private readonly translate: TranslateService) {
-        translate.setDefaultLang('en');
+    constructor(public electronService: ElectronService) {}
+
+    onClickMin(): void {
+        this.electronService.remote.getCurrentWindow().minimize();
+    }
+
+    onClickMax(): void {
+        this.electronService.remote.getCurrentWindow().maximize();
+    }
+
+    onClickRestore(): void {
+        this.electronService.remote.getCurrentWindow().restore();
+    }
+
+    onClickClose(): void {
+        this.electronService.remote.getCurrentWindow().close();
+    }
+
+    isMaximized(): boolean {
+        return this.electronService.remote.getCurrentWindow().isMaximized();
     }
 }

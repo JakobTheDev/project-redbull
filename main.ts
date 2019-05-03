@@ -20,7 +20,8 @@ function createWindow(): void {
         height: size.height,
         webPreferences: {
             nodeIntegration: true
-        }
+        },
+        frame: false
     });
 
     if (serve) {
@@ -39,9 +40,9 @@ function createWindow(): void {
         );
     }
 
-    if (serve) {
-        win.webContents.openDevTools();
-    }
+    // if (serve) {
+    //     win.webContents.openDevTools();
+    // }
 
     // Emitted when the window is closed.
     win.on('closed', () => {
