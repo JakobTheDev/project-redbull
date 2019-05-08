@@ -5,10 +5,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ClarityModule } from '@clr/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AppNavbarComponent } from 'app/core/containers/app-navbar/app-navbar.component';
+import { AppComponent } from 'app/core/containers/app/app.component';
+import { CoreModule } from 'app/core/core.module';
 import { WebviewDirective } from 'app/shared/directives/webview.directive';
 import { ElectronService } from 'app/shared/services/electron.service';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -16,7 +18,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-    declarations: [AppComponent, WebviewDirective],
+    declarations: [AppComponent, AppNavbarComponent, WebviewDirective],
     imports: [
         BrowserModule,
         FormsModule,
@@ -29,7 +31,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
                 useFactory: HttpLoaderFactory,
                 deps: [HttpClient]
             }
-        })
+        }),
+        CoreModule
     ],
     providers: [ElectronService],
     bootstrap: [AppComponent]
