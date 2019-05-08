@@ -1,0 +1,40 @@
+<div class="main-container">
+    <!-- Title bar -->
+    <div class="titlebar">
+        <!-- Branding -->
+        <div class="branding">
+            <a routerLink="/">
+                <clr-icon shape="bullseye"></clr-icon>
+                <span>Project Redbull</span>
+            </a>
+        </div>
+
+        <!-- Window controls -->
+        <div class="controls">
+            <div (click)="onClickMin()">
+                <clr-icon shape="window-min"></clr-icon>
+            </div>
+            <div *ngIf="!isMaximized()" (click)="onClickMax()">
+                <clr-icon shape="window-max"></clr-icon>
+            </div>
+            <div *ngIf="isMaximized()" (click)="onClickUnmaximise()">
+                <clr-icon shape="window-restore"></clr-icon>
+            </div>
+            <div (click)="onClickClose()">
+                <clr-icon shape="window-close"></clr-icon>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="app-wrapper clr-row">
+            <div class="clr-col-auto">
+                <redbull-app-navbar></redbull-app-navbar>
+            </div>
+            <div class="clr-col">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
