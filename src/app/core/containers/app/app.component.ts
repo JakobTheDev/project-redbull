@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ElectronService } from 'app/shared/services/electron.service';
 
 @Component({
     selector: 'redbull-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
     constructor(public electronService: ElectronService) {}
@@ -17,8 +18,8 @@ export class AppComponent {
         this.electronService.remote.getCurrentWindow().maximize();
     }
 
-    onClickRestore(): void {
-        this.electronService.remote.getCurrentWindow().restore();
+    onClickUnmaximise(): void {
+        this.electronService.remote.getCurrentWindow().unmaximize();
     }
 
     onClickClose(): void {

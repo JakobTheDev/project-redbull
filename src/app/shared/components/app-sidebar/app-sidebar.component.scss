@@ -1,0 +1,17 @@
+// Import global stylesheet
+@import '_variables.scss';
+
+$sidebar-width: 350px;
+
+:host {
+    background-color: $base03;
+    min-width: $sidebar-width;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: $redbull-content-padding;
+}
+
+:first-child {
+    margin-top: 0;
+}

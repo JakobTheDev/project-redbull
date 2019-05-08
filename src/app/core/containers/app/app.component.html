@@ -1,6 +1,6 @@
 <div class="main-container">
-    <!-- Navigation bar -->
-    <div class="navbar">
+    <!-- Title bar -->
+    <div class="titlebar">
         <!-- Branding -->
         <div class="branding">
             <a routerLink="/">
@@ -17,7 +17,7 @@
             <div *ngIf="!isMaximized()" (click)="onClickMax()">
                 <clr-icon shape="window-max"></clr-icon>
             </div>
-            <div *ngIf="isMaximized()" (click)="onClickRestore()">
+            <div *ngIf="isMaximized()" (click)="onClickUnmaximise()">
                 <clr-icon shape="window-restore"></clr-icon>
             </div>
             <div (click)="onClickClose()">
@@ -28,6 +28,13 @@
 
     <!-- Content -->
     <div class="content">
-        <router-outlet></router-outlet>
+        <div class="app-wrapper clr-row">
+            <div class="clr-col-auto">
+                <redbull-app-navbar></redbull-app-navbar>
+            </div>
+            <div class="clr-col">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,0 +1,23 @@
+<!-- Top icons -->
+<div class="clr-row">
+    <div class="clr-col-12">
+        <!-- Project -->
+        <div (click)="navbarIconClicked(AppRoutes.PROJECT)" [class.active]="isCurrentRoute(AppRoutes.PROJECT)" class="clr-row navbar-icon">
+            <div class="clr-col-12">
+                <clr-icon shape="pinboard"></clr-icon>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom icons -->
+<div class="clr-row">
+    <div class="clr-col-12">
+        <!-- Settings -->
+        <div (click)="navbarIconClicked(AppRoutes.SETTINGS)" [class.active]="isCurrentRoute(AppRoutes.SETTINGS)" class="clr-row navbar-icon">
+            <div class="clr-col-12">
+                <clr-icon shape="cog"></clr-icon>
+            </div>
+        </div>
+    </div>
+</div>

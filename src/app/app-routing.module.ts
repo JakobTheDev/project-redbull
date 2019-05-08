@@ -1,20 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from 'app/home/containers/home/home.component';
+import { AppRoutes } from 'app/core/models/app-routes.model';
 
 const routes: Routes = [
     {
+        path: AppRoutes.PROJECT,
+        loadChildren: 'app/project/project.module#ProjectModule'
+    },
+    {
+        path: AppRoutes.SETTINGS,
+        loadChildren: 'app/settings/settings.module#SettingsModule'
+    },
+    {
         path: '',
-        loadChildren: 'app/home/home.module#HomeModule'
+        redirectTo: AppRoutes.PROJECT,
+        pathMatch: 'prefix'
     },
     {
         path: '**',
-        redirectTo: ''
+        redirectTo: AppRoutes.PROJECT
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, { useHash: true })],
+    imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
 export class AppRoutingModule {}
