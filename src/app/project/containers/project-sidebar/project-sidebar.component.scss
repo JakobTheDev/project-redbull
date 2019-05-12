@@ -1,0 +1,32 @@
+// Import global stylesheet
+@import '_variables.scss';
+
+:first-child {
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+div.project {
+    cursor: pointer;
+    height: 70px;
+    margin: 0px (-$redbull-content-padding);
+    .clr-col-12 {
+        padding: 0px $redbull-content-padding;
+    }
+    &.selected {
+        background-color: $base02;
+        p {
+            font-weight: 600;
+        }
+    }
+}
+
+p.p2 {
+    margin-top: 0px;
+}
+
+.truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

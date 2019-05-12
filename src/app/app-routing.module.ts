@@ -4,17 +4,9 @@ import { AppRoutes } from 'app/core/models/app-routes.model';
 
 const routes: Routes = [
     {
-        path: AppRoutes.PROJECT,
-        loadChildren: 'app/project/project.module#ProjectModule'
-    },
-    {
-        path: AppRoutes.SETTINGS,
-        loadChildren: 'app/settings/settings.module#SettingsModule'
-    },
-    {
         path: '',
         redirectTo: AppRoutes.PROJECT,
-        pathMatch: 'prefix'
+        pathMatch: 'full'
     },
     {
         path: '**',

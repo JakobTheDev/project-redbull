@@ -1,7 +1,20 @@
 {
-    "PAGES": {
-        "HOME": {
-            "TITLE": "App works !"
+    "feature": {
+        "project": {
+            "heading": {
+                "projectDetails": "Project Details"
+            },
+            "label": {
+                "clientName": "Client Name",
+                "projectNumber": "Project Number",
+                "projectName": "Project Name",
+                "workPackage": "Work Package",
+                "businessDevelopmentName": "Business Development Manager",
+                "qualityAssuranceName": "Quality Assurance",
+                "projectLeadName": "Project Lead",
+                "clientSponsor": "Client Sponsor",
+                "isVAAReturned": "VAA Returned"
+            }
         }
     }
 }
