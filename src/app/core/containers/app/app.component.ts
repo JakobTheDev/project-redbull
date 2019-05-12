@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { LoadProjectList } from 'app/project/store/project.action';
 import { ElectronService } from 'app/shared/services/electron.service';
 
 @Component({
@@ -8,7 +10,10 @@ import { ElectronService } from 'app/shared/services/electron.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-    constructor(public electronService: ElectronService) {}
+    constructor(public electronService: ElectronService, private readonly store: Store) {
+        // load project list
+        store.dispatch(new LoadProjectList());
+    }
 
     onClickMin(): void {
         this.electronService.remote.getCurrentWindow().minimize();
