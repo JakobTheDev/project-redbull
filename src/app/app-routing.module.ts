@@ -7,10 +7,6 @@ const routes: Routes = [
         path: '',
         redirectTo: AppRoutes.PROJECT,
         pathMatch: 'full'
-    },
-    {
-        path: '**',
-        redirectTo: AppRoutes.PROJECT
     }
 ];
 

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from 'app/core/models/app-routes.model';
-import { SettingsComponent } from 'app/settings/containers/settings/settings.component';
+import { MethodologyComponent } from 'app/methoodology/containers/methodology/methodology.component';
 
 const routes: Routes = [
     {
-        path: AppRoutes.SETTINGS,
-        component: SettingsComponent
+        path: AppRoutes.METHODOLOGY,
+        component: MethodologyComponent
     }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class SettingsRoutingModule {}
+export class MethoodologyRoutingModule {}

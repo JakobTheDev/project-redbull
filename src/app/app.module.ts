@@ -7,7 +7,9 @@ import { NgxsModule } from '@ngxs/store';
 import { AppNavbarComponent } from 'app/core/containers/app-navbar/app-navbar.component';
 import { AppComponent } from 'app/core/containers/app/app.component';
 import { CoreModule } from 'app/core/core.module';
+import { MethodologyModule } from 'app/methoodology/methodology.module';
 import { ProjectModule } from 'app/project/project.module';
+import { SettingsModule } from 'app/settings/settings.module';
 import { TranslateModule } from 'app/shared-modules/translate/translate.module';
 import { WebviewDirective } from 'app/shared/directives/webview.directive';
 import { ElectronService } from 'app/shared/services/electron.service';
@@ -38,7 +40,9 @@ import { AppRoutingModule } from './app-routing.module';
         // Import applications modules
         // No lazy-loading doue to electron app
         CoreModule,
-        ProjectModule
+        ProjectModule,
+        MethodologyModule,
+        SettingsModule
     ],
     providers: [ElectronService],
     bootstrap: [AppComponent]

@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectSidebarComponent {
-    // store subscriptions
+    // store observables
     project$: Observable<Project>;
     projectList$: Observable<Array<ProjectProperties>>;
 

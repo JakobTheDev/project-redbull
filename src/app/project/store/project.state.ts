@@ -34,13 +34,13 @@ export class ProjectState {
         const state: ProjectStateModel = context.getState();
         // add project to list
         const projectList: Array<ProjectProperties> = [...state.projectList, { path: payload.path, dateCreated: new Date() }];
-        // write to file
-        this.saveProjectProperties(projectList);
         // patch state
         context.setState({
             project: { path: payload.path },
             projectList: [...projectList]
         });
+        // write to file
+        this.saveProjectProperties(projectList);
     }
 
     @Action(LoadProject) loadProject({ patchState }: StateContext<ProjectStateModel>, { payload }: LoadProject): void {
@@ -59,14 +59,14 @@ export class ProjectState {
         const projectList: Array<ProjectProperties> = context.getState().projectList;
         const index: number = projectList.findIndex((project: ProjectProperties) => project.path === payload.project.path);
         projectList[index] = { path: payload.project.path, clientName: payload.project.clientName, projectName: payload.project.projectName, projectNumber: payload.project.projectNumber }; // TODO simplify
-        // write the projects to file
-        this.saveProject(payload.project);
-        this.saveProjectProperties(projectList);
         // patch state
         context.patchState({
             project: payload.project,
             projectList: [...projectList]
         });
+        // write the projects to file
+        this.saveProject(payload.project);
+        this.saveProjectProperties(projectList);
     }
 
     @Action(LoadProjectList) loadProjectList({ patchState }: StateContext<ProjectStateModel>): void {

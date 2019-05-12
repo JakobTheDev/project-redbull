@@ -23,9 +23,7 @@ export class AppNavbarComponent {
         );
     }
 
-    // final part of ternary sets default to project
-    // TODO: fix this logic
-    isCurrentRoute = (route: string): boolean => (this.currentRoute ? this.currentRoute === route : route === AppRoutes.PROJECT);
+    isCurrentRoute = (route: string): boolean => this.currentRoute === route;
 
     navbarIconClicked(appRoute: string): void {
         this.router.navigate([`/${appRoute}`]);
