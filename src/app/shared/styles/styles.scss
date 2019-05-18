@@ -4,3 +4,9 @@
 
 // Import global stylesheet
 @import './_variables';
+
+.truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

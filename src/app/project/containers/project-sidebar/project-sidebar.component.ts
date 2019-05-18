@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { LoadProject, NewProject } from 'app/project/store/project.action';
 import { ProjectState } from 'app/project/store/project.state';
-import { fileFilters } from 'app/shared/models/file-filters.model';
+import { projectFileFilters } from 'app/shared/models/file-filters.model';
 import { Project, ProjectProperties } from 'app/shared/models/project.model';
 import { ElectronService } from 'app/shared/services/electron.service';
 import { Observable } from 'rxjs';
@@ -24,7 +24,7 @@ export class ProjectSidebarComponent {
     }
 
     newProject(): void {
-        this.electronService.remote.dialog.showSaveDialog({ filters: fileFilters }, (fileName: any) => {
+        this.electronService.remote.dialog.showSaveDialog({ filters: projectFileFilters }, (fileName: any) => {
             // user cancelled or something failed, abort
             if (fileName === undefined) {
                 return;

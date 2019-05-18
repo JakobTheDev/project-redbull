@@ -1,5 +1,5 @@
 <ng-container *ngIf="projectDetailsForm.get('path').value">
-    <h2>{{ 'feature.project.heading.projectDetails' | translate }}</h2>
+    <h2>{{ getProjectTitle() }}</h2>
     <p class="path">{{ projectDetailsForm.get('path').value }}</p>
 
     <form [formGroup]="projectDetailsForm" class="clr-form clr-form-horizontal">

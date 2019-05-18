@@ -8,3 +8,11 @@
         </button>
     </div>
 </div>
+
+<redbull-sidebar-list-item
+    *ngFor="let methodology of methodologyList$ | async; trackBy: trackByMethodology"
+    [selected]="(methodology$ | async)?.path === methodology.path"
+    [title]="methodology.methodologyName"
+    [subtitle]="methodology.path"
+    (click)="onMethodologySelected(methodology)"
+></redbull-sidebar-list-item>

@@ -3,6 +3,7 @@ import { LoadProject, LoadProjectList, NewProject, UpdateProject } from 'app/pro
 import { Project, ProjectProperties } from 'app/shared/models/project.model';
 import { ElectronService } from 'app/shared/services/electron.service';
 import { environment } from 'environments/environment';
+import { Guid } from 'guid-typescript';
 
 // state model
 export interface ProjectStateModel {
@@ -32,14 +33,18 @@ export class ProjectState {
     @Action(NewProject) newProject(context: StateContext<ProjectStateModel>, { payload }: NewProject): void {
         // get state
         const state: ProjectStateModel = context.getState();
+        // create the new project
+        const newProject: Project = { id: Guid.create(), path: payload.path, dateCreated: new Date() };
         // add project to list
-        const projectList: Array<ProjectProperties> = [...state.projectList, { path: payload.path, dateCreated: new Date() }];
+        const projectList: Array<ProjectProperties> = [...state.projectList, newProject];
         // patch state
         context.setState({
-            project: { path: payload.path },
+            project: newProject,
             projectList: [...projectList]
         });
         // write to file
+        // write the projects to file
+        this.saveProject(newProject);
         this.saveProjectProperties(projectList);
     }
 
@@ -58,7 +63,17 @@ export class ProjectState {
         // update project properties list based on project details
         const projectList: Array<ProjectProperties> = context.getState().projectList;
         const index: number = projectList.findIndex((project: ProjectProperties) => project.path === payload.project.path);
-        projectList[index] = { path: payload.project.path, clientName: payload.project.clientName, projectName: payload.project.projectName, projectNumber: payload.project.projectNumber }; // TODO simplify
+        // construct project title
+        payload.project.projectTitle = this.getProjectTitle(payload.project);
+        // not speading into the object to drop irrelevant properties. // TODO: simplify
+        projectList[index] = {
+            id: payload.project.id,
+            path: payload.project.path,
+            clientName: payload.project.clientName,
+            projectName: payload.project.projectName,
+            projectNumber: payload.project.projectNumber,
+            projectTitle: payload.project.projectTitle
+        };
         // patch state
         context.patchState({
             project: payload.project,
@@ -70,7 +85,7 @@ export class ProjectState {
     }
 
     @Action(LoadProjectList) loadProjectList({ patchState }: StateContext<ProjectStateModel>): void {
-        this.electronService.fs.readFile(`${this.electronService.userDataPath()}\\${environment.projectPropertiesFileName}`, 'utf8', (err: NodeJS.ErrnoException, data: string) => {
+        this.electronService.fs.readFile(`${this.electronService.userDataPath()}\\${environment.projectsFileName}`, 'utf8', (err: NodeJS.ErrnoException, data: string) => {
             // file doesn't exist, do nothing
             if (err) return;
             // parse the data read from file
@@ -84,15 +99,27 @@ export class ProjectState {
 
     constructor(private readonly electronService: ElectronService, private readonly store: Store) {}
 
+    private getProjectTitle(project: Project): string {
+        if (!project) return '';
+        // construct title (yuck)
+        let title: string = project.projectNumber ? `[${project.projectNumber}]` : ''; // project number
+        title = project.projectNumber && project.clientName ? `${title} ` : `${title}`; // space separator
+        title = project.clientName ? `${title}${project.clientName}` : `${title}`; // client name
+        title = project.clientName && project.projectName ? `${title} - ` : `${title}`; // separator
+        title = project.projectName ? `${title}${project.projectName}` : `${title}`; // project name
+        return title;
+    }
+
     private saveProject(project: Project): void {
-        this.electronService.fs.writeFile(project.path, JSON.stringify(project), (err: NodeJS.ErrnoException) => {
+        const savePayload: Project | Object = project ? project : {};
+        this.electronService.fs.writeFile(project.path, JSON.stringify(savePayload), (err: NodeJS.ErrnoException) => {
             // user cancelled or something failed, abort
             if (err) alert(err.message);
         });
     }
 
     private saveProjectProperties(projects: Array<ProjectProperties>): void {
-        this.electronService.fs.writeFile(`${this.electronService.userDataPath()}\\${environment.projectPropertiesFileName}`, JSON.stringify(projects), (err: NodeJS.ErrnoException) => {
+        this.electronService.fs.writeFile(`${this.electronService.userDataPath()}\\${environment.projectsFileName}`, JSON.stringify(projects), (err: NodeJS.ErrnoException) => {
             // user cancelled or something failed, abort
             if (err) alert(err.message);
         });

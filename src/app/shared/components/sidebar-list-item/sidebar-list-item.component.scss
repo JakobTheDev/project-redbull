@@ -1,0 +1,23 @@
+// Import global stylesheet
+@import '_variables.scss';
+
+.project {
+    cursor: pointer;
+    height: 70px;
+    max-width: $redbull-sidebar-width;
+    margin: 0px (-$redbull-content-padding);
+    .clr-col-12 {
+        padding: 0px $redbull-content-padding;
+    }
+    &.selected {
+        background-color: $base02;
+        p {
+            font-weight: 600;
+        }
+    }
+}
+
+p,
+p.p2 {
+    margin-top: 0px;
+}

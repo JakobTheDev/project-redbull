@@ -6,7 +6,8 @@ import { ProjectState } from 'app/project/store/project.state';
 import { Project } from 'app/shared/models/project.model';
 import { debounceTime } from 'rxjs/operators';
 
-const STORE_UPDATE_DEBOUNCE: number = 2002;
+const STORE_UPDATE_DEBOUNCE: number = 200;
+const STRING_NEW_PROJECT: string = 'New Project';
 
 @Component({
     selector: 'redbull-project-details',
@@ -16,10 +17,12 @@ const STORE_UPDATE_DEBOUNCE: number = 2002;
 })
 export class ProjectDetailsComponent {
     projectDetailsForm: FormGroup = new FormGroup({
+        id: new FormControl(''),
         path: new FormControl(''),
         clientName: new FormControl(''),
         projectNumber: new FormControl(''),
         projectName: new FormControl(''),
+        projectTitle: new FormControl(''),
         workPackage: new FormControl(''),
         businessDevelopmentName: new FormControl(''),
         qualityAssuranceName: new FormControl(''),
@@ -41,4 +44,6 @@ export class ProjectDetailsComponent {
             }
         });
     }
+
+    getProjectTitle = () => (this.projectDetailsForm.controls.projectTitle.value ? this.projectDetailsForm.controls.projectTitle.value : STRING_NEW_PROJECT);
 }

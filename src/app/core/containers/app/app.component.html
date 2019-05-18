@@ -9,7 +9,7 @@
 
         <!-- title -->
         <div class="title">
-            <span>{{ getTitleLine(project$ | async) }}</span>
+            <span>{{ (project$ | async)?.projectTitle }}</span>
         </div>
 
         <!-- Window controls -->
