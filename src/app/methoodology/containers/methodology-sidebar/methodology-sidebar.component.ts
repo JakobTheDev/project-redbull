@@ -23,6 +23,9 @@ export class MethodologySidebarComponent {
         this.methodologyList$ = this.store.select(MethodologyState.methodologyList);
     }
 
+    /**
+     * create a new methodology
+     */
     newMethodology(): void {
         this.electronService.remote.dialog.showSaveDialog({ filters: methodologyFileFilters }, (fileName: any) => {
             // user cancelled or something failed, abort
@@ -39,11 +42,17 @@ export class MethodologySidebarComponent {
         });
     }
 
-    // load methodology on select
+    /**
+     * hanlde methodology click event
+     * @param methodologyProperties properties of the selected methodology
+     */
     onMethodologySelected(methodologyProperties: MethodologyProperties): void {
-        this.store.dispatch(new LoadMethodology({ methodologyProperties }));
+        // load methodology
+        this.store.dispatch(new LoadMethodology({ path: methodologyProperties.path }));
     }
 
-    // trackBy functions
+    /**
+     * trackby funciton for methodology list
+     */
     trackByMethodology = (index: number, methodologyProperties: MethodologyProperties) => methodologyProperties.path;
 }

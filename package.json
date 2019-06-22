@@ -136,8 +136,10 @@
         "@clr/icons": "^1.1.3",
         "@clr/ui": "^1.1.3",
         "@ngxs/devtools-plugin": "^3.4.3",
+        "@ngxs/form-plugin": "^3.4.3",
         "@ngxs/store": "^3.4.3",
         "@webcomponents/custom-elements": "^1.0.0",
-        "guid-typescript": "^1.0.9"
+        "guid-typescript": "^1.0.9",
+        "ng2-dragula": "^2.1.1"
     }
 }

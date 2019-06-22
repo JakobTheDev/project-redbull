@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { ProjectDetailsComponent } from 'app/project/containers/project-details/project-details.component';
 import { ProjectSidebarComponent } from 'app/project/containers/project-sidebar/project-sidebar.component';
@@ -17,7 +18,8 @@ import { SharedModule } from 'app/shared/shared.module';
         ProjectRoutingModule,
 
         // set up project state
-        NgxsModule.forFeature([ProjectState])
+        NgxsModule.forFeature([ProjectState]),
+        NgxsFormPluginModule
     ]
 })
 export class ProjectModule {}

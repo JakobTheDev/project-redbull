@@ -3,7 +3,7 @@
 
 .project {
     cursor: pointer;
-    height: 70px;
+    height: $redbull-list-height;
     max-width: $redbull-sidebar-width;
     margin: 0px (-$redbull-content-padding);
     .clr-col-12 {
@@ -15,9 +15,13 @@
             font-weight: 600;
         }
     }
+    &:hover {
+        background-color: $base02;
+    }
 }
 
 p,
 p.p2 {
     margin-top: 0px;
+    min-height: 24px;
 }

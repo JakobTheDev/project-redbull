@@ -1,13 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { UpdateProject } from 'app/project/store/project.action';
+import { RemoveProject } from 'app/project/store/project.action';
 import { ProjectState } from 'app/project/store/project.state';
 import { Project } from 'app/shared/models/project.model';
-import { debounceTime } from 'rxjs/operators';
-
-const STORE_UPDATE_DEBOUNCE: number = 200;
-const STRING_NEW_PROJECT: string = 'New Project';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'redbull-project-details',
@@ -15,9 +13,18 @@ const STRING_NEW_PROJECT: string = 'New Project';
     styleUrls: ['./project-details.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProjectDetailsComponent {
-    projectDetailsForm: FormGroup = new FormGroup({
-        id: new FormControl(''),
+export class ProjectDetailsComponent implements OnDestroy, OnInit {
+    /**
+     * unsubscrive brom component observables
+     */
+    unsubscribed$: Subject<boolean> = new Subject();
+
+    /**
+     * set up the form
+     * linked to store via template directive
+     */
+    projectForm: FormGroup = new FormGroup({
+        id: new FormControl(null),
         path: new FormControl(''),
         clientName: new FormControl(''),
         projectNumber: new FormControl(''),
@@ -31,19 +38,42 @@ export class ProjectDetailsComponent {
         isVAAReturned: new FormControl(false)
     });
 
-    constructor(private readonly store: Store, private readonly ref: ChangeDetectorRef) {
-        // update the store
-        this.projectDetailsForm.valueChanges.pipe(debounceTime(STORE_UPDATE_DEBOUNCE)).subscribe((project: Project) => this.store.dispatch(new UpdateProject({ project })));
+    constructor(private readonly store: Store, private readonly ref: ChangeDetectorRef) {}
 
-        this.store.select(ProjectState.project).subscribe((project: Project) => {
-            // path changes when project changes
-            if (project && project.path !== this.projectDetailsForm.get('path').value) {
-                this.projectDetailsForm.reset();
-                this.projectDetailsForm.patchValue(project);
-                this.ref.markForCheck();
-            }
-        });
+    ngOnInit(): void {
+        /**
+         * subscribe to the project state
+         * patches project form when loaded from file
+         */
+        this.store
+            .select(ProjectState.project)
+            .pipe(takeUntil(this.unsubscribed$))
+            .subscribe((project: Project) => {
+                // reset the form
+                this.projectForm.reset();
+                // patch project details
+                if (!!project) this.projectForm.patchValue(project);
+                // kick off change detection
+                this.projectForm.updateValueAndValidity();
+                this.ref.detectChanges();
+            });
     }
 
-    getProjectTitle = () => (this.projectDetailsForm.controls.projectTitle.value ? this.projectDetailsForm.controls.projectTitle.value : STRING_NEW_PROJECT);
+    ngOnDestroy(): void {
+        // unsubscribe on component teardown
+        this.unsubscribed$.next(false);
+        this.unsubscribed$.complete();
+    }
+
+    /**
+     * returns whether a project is currently loaded
+     */
+    isProjectLoaded = (): boolean => !!this.projectForm.controls.id.value;
+
+    /**
+     * remove the current project
+     */
+    removeProject(): void {
+        this.store.dispatch(new RemoveProject());
+    }
 }

@@ -1,10 +1,8 @@
-import { Guid } from 'guid-typescript';
-
 /**
  * high level project properties saved to file for projects list
  */
 export interface ProjectProperties {
-    id: Guid;
+    id: string;
     path: string;
     projectNumber?: string;
     projectName?: string;

@@ -11,8 +11,8 @@
 
 <redbull-sidebar-list-item
     *ngFor="let project of projectList$ | async; trackBy: trackByProject"
-    [selected]="(project$ | async)?.path === project.path"
-    [title]="(project$ | async)?.projectTitle"
-    [subtitle]="(project$ | async)?.path"
+    [selected]="project.id == (project$ | async)?.id"
+    [title]="project?.projectTitle"
+    [subtitle]="project?.path"
     (click)="onProjectSelected(project)"
 ></redbull-sidebar-list-item>

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ClarityModule } from '@clr/angular';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { AppNavbarComponent } from 'app/core/containers/app-navbar/app-navbar.component';
 import { AppComponent } from 'app/core/containers/app/app.component';
@@ -14,6 +15,7 @@ import { TranslateModule } from 'app/shared-modules/translate/translate.module';
 import { WebviewDirective } from 'app/shared/directives/webview.directive';
 import { ElectronService } from 'app/shared/services/electron.service';
 import { environment } from 'environments/environment';
+import { DragulaModule } from 'ng2-dragula';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -28,8 +30,12 @@ import { AppRoutingModule } from './app-routing.module';
         // clarity ui framework
         ClarityModule,
 
+        // dragula
+        DragulaModule.forRoot(),
+
         // ngxs state management
         NgxsModule.forRoot(),
+        NgxsFormPluginModule.forRoot(),
         NgxsReduxDevtoolsPluginModule.forRoot({
             disabled: environment.production
         }),

@@ -39,20 +39,9 @@ export class ProjectSidebarComponent {
         });
     }
 
-    // construct the title line
-    getTitleLine(project: ProjectProperties): string {
-        // construct title (yuck)
-        let title: string = project.projectNumber ? `[${project.projectNumber}]` : ''; // project number
-        title = project.projectNumber && project.clientName ? `${title} ` : `${title}`; // space separator
-        title = project.clientName ? `${title}${project.clientName}` : `${title}`; // client name
-        title = project.clientName && project.projectName ? `${title} - ` : `${title}`; // separator
-        title = project.projectName ? `${title}${project.projectName}` : `${title}`; // project name
-        return title;
-    }
-
     // load project on select
     onProjectSelected(projectProperties: ProjectProperties): void {
-        this.store.dispatch(new LoadProject({ projectProperties }));
+        this.store.dispatch(new LoadProject({ path: projectProperties.path }));
     }
 
     // trackBy functions
