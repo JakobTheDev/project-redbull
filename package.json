@@ -92,6 +92,7 @@
         "prettier": "^1.17.0",
         "rxjs": "6.4.0",
         "rxjs-tslint-rules": "^4.22.1",
+        "semantic-release": "^15.13.16",
         "snyk": "^1.161.1",
         "spectron": "5.0.0",
         "stylelint": "^10.0.1",
@@ -129,6 +130,12 @@
         "validate-commit-msg": {
             "types": "conventional-commit-types",
             "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+        }
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "validate-commit-msg",
+            "pre-commit": "lint-staged"
         }
     }
 }
