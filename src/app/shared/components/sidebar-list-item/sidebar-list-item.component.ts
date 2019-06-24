@@ -10,6 +10,4 @@ export class SidebarListItemComponent {
     @Input() title: string;
     @Input() subtitle: string;
     @Input() selected: boolean;
-
-    constructor() {}
 }

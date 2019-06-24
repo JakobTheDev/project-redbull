@@ -25,6 +25,9 @@
 
     <!-- Methodology sections -->
     <div [dragula]="DRAGULA_METHODOLOGY_SECTION" class="methodology-section-wrapper" [(dragulaModel)]="methodologyForm['controls'].sections['controls']">
-        <redbull-methodology-section *ngFor="let section of methodologyForm['controls'].sections['controls']; let i = index" [sectionForm]="section"></redbull-methodology-section>
+        <redbull-methodology-section
+            *ngFor="let section of methodologyForm['controls'].sections['controls']; let i = index; trackBy: section.get('id').value"
+            [sectionForm]="section"
+        ></redbull-methodology-section>
     </div>
 </form>
