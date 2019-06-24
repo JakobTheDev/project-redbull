@@ -9,14 +9,10 @@
     </div>
 </div>
 
-<div
+<redbull-sidebar-list-item
     *ngFor="let project of projectList$ | async; trackBy: trackByProject"
-    class="project clr-row clr-align-items-end"
-    [class.selected]="(project$ | async)?.path === project.path"
+    [selected]="project.id == (project$ | async)?.id"
+    [title]="project?.projectTitle"
+    [subtitle]="project?.path"
     (click)="onProjectSelected(project)"
->
-    <div class="clr-col-12">
-        <p class="truncate">{{ getTitleLine(project) }}</p>
-        <p class="p2 truncate">{{ project.path }}</p>
-    </div>
-</div>
+></redbull-sidebar-list-item>

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SettingsComponent } from 'app/settings/containers/settings/settings.component';
+import { AppRoutes } from 'app/shared/models/app-routes.model';
 
 const routes: Routes = [
     {
-        path: '',
+        path: AppRoutes.SETTINGS,
         component: SettingsComponent
     }
 ];

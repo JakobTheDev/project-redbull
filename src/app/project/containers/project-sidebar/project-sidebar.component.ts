@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { LoadProject, NewProject } from 'app/project/store/project.action';
 import { ProjectState } from 'app/project/store/project.state';
-import { fileFilters } from 'app/shared/models/file-filters.model';
+import { projectFileFilters } from 'app/shared/models/file-filters.model';
 import { Project, ProjectProperties } from 'app/shared/models/project.model';
 import { ElectronService } from 'app/shared/services/electron.service';
 import { Observable } from 'rxjs';
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectSidebarComponent {
-    // store subscriptions
+    // store observables
     project$: Observable<Project>;
     projectList$: Observable<Array<ProjectProperties>>;
 
@@ -24,7 +24,7 @@ export class ProjectSidebarComponent {
     }
 
     newProject(): void {
-        this.electronService.remote.dialog.showSaveDialog({ filters: fileFilters }, (fileName: any) => {
+        this.electronService.remote.dialog.showSaveDialog({ filters: projectFileFilters }, (fileName: any) => {
             // user cancelled or something failed, abort
             if (fileName === undefined) {
                 return;
@@ -39,20 +39,9 @@ export class ProjectSidebarComponent {
         });
     }
 
-    // construct the title line
-    getTitleLine(project: ProjectProperties): string {
-        // construct title (yuck)
-        let title: string = project.projectNumber ? `[${project.projectNumber}]` : ''; // project number
-        title = project.projectNumber && project.clientName ? `${title} ` : `${title}`; // space separator
-        title = project.clientName ? `${title}${project.clientName}` : `${title}`; // client name
-        title = project.clientName && project.projectName ? `${title} - ` : `${title}`; // separator
-        title = project.projectName ? `${title}${project.projectName}` : `${title}`; // project name
-        return title;
-    }
-
     // load project on select
     onProjectSelected(projectProperties: ProjectProperties): void {
-        this.store.dispatch(new LoadProject({ projectProperties }));
+        this.store.dispatch(new LoadProject({ path: projectProperties.path }));
     }
 
     // trackBy functions

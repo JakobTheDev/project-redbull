@@ -3,10 +3,13 @@
     <div class="titlebar">
         <!-- Branding -->
         <div class="branding">
-            <a routerLink="/">
-                <clr-icon shape="bullseye"></clr-icon>
-                <span>Project Redbull</span>
-            </a>
+            <clr-icon shape="bullseye"></clr-icon>
+            <span>Project Redbull</span>
+        </div>
+
+        <!-- title -->
+        <div class="title">
+            <span>{{ (project$ | async)?.projectTitle }}</span>
         </div>
 
         <!-- Window controls -->

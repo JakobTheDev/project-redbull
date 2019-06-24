@@ -1,96 +1,113 @@
-<ng-container *ngIf="projectDetailsForm.get('path').value">
-    <h2>{{ 'feature.project.heading.projectDetails' | translate }}</h2>
-    <p class="path">{{ projectDetailsForm.get('path').value }}</p>
-
-    <form [formGroup]="projectDetailsForm" class="clr-form clr-form-horizontal">
-        <!-- Client name -->
-        <div class="clr-form-control clr-row">
-            <label for="clientName" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.clientName' | translate }}</label>
-            <div class="clr-control-container clr-col-12 clr-col-md-9">
-                <div class="clr-input-wrapper">
-                    <input type="text" id="clientName" formControlName="clientName" class="clr-input" />
-                </div>
+<form *ngIf="isProjectLoaded()" [formGroup]="projectForm" ngxsForm="projectState.projectForm" class="clr-form clr-form-horizontal">
+    <!-- Project name -->
+    <div class="clr-form-control clr-row">
+        <div class="clr-control-container clr-col">
+            <div class="clr-input-wrapper">
+                <input type="text" id="projectTitle" formControlName="projectTitle" class="clr-input title" />
             </div>
         </div>
+        <!-- Remove project section -->
+        <div class="clr-col-auto">
+            <button type="button" class="btn btn-icon btn-link" (click)="removeProject()">
+                <clr-icon title="Remove project" shape="trash"></clr-icon>
+            </button>
+        </div>
+    </div>
 
-        <!-- Project number -->
-        <div class="clr-form-control clr-row">
-            <label for="projectNumber" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.projectNumber' | translate }}</label>
-            <div class="clr-control-container clr-col-12 clr-col-md-9">
-                <div class="clr-input-wrapper">
-                    <input type="text" id="projectNumber" formControlName="projectNumber" class="clr-input" />
-                </div>
+    <!-- Path subtitle -->
+    <div class="clr-form-control clr-row path">
+        <div class="clr-col-12 clr-col-md-9">
+            <p>{{ projectForm.get('path').value }}</p>
+        </div>
+    </div>
+
+    <!-- Client name -->
+    <div class="clr-form-control clr-row">
+        <label for="clientName" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.clientName' | translate }}</label>
+        <div class="clr-control-container clr-col-12 clr-col-md-9">
+            <div class="clr-input-wrapper">
+                <input type="text" id="clientName" formControlName="clientName" class="clr-input" />
             </div>
         </div>
+    </div>
 
-        <!-- Project name -->
-        <div class="clr-form-control clr-row">
-            <label for="projectName" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.projectName' | translate }}</label>
-            <div class="clr-control-container clr-col-12 clr-col-md-9">
-                <div class="clr-input-wrapper">
-                    <input type="text" id="projectName" formControlName="projectName" class="clr-input" />
-                </div>
+    <!-- Project number -->
+    <div class="clr-form-control clr-row">
+        <label for="projectNumber" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.projectNumber' | translate }}</label>
+        <div class="clr-control-container clr-col-12 clr-col-md-9">
+            <div class="clr-input-wrapper">
+                <input type="text" id="projectNumber" formControlName="projectNumber" class="clr-input" />
             </div>
         </div>
+    </div>
 
-        <!-- Work package -->
-        <div class="clr-form-control clr-row">
-            <label for="workPackage" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.workPackage' | translate }}</label>
-            <div class="clr-control-container clr-col-12 clr-col-md-9">
-                <div class="clr-input-wrapper">
-                    <input type="text" id="workPackage" formControlName="workPackage" class="clr-input" />
-                </div>
+    <!-- Project name -->
+    <div class="clr-form-control clr-row">
+        <label for="projectName" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.projectName' | translate }}</label>
+        <div class="clr-control-container clr-col-12 clr-col-md-9">
+            <div class="clr-input-wrapper">
+                <input type="text" id="projectName" formControlName="projectName" class="clr-input" />
             </div>
         </div>
+    </div>
 
-        <!-- BD name -->
-        <div class="clr-form-control clr-row">
-            <label for="businessDevelopmentName" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.businessDevelopmentName' | translate }}</label>
-            <div class="clr-control-container clr-col-12 clr-col-md-9">
-                <div class="clr-input-wrapper">
-                    <input type="text" id="businessDevelopmentName" formControlName="businessDevelopmentName" class="clr-input" />
-                </div>
+    <!-- Work package -->
+    <div class="clr-form-control clr-row">
+        <label for="workPackage" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.workPackage' | translate }}</label>
+        <div class="clr-control-container clr-col-12 clr-col-md-9">
+            <div class="clr-input-wrapper">
+                <input type="text" id="workPackage" formControlName="workPackage" class="clr-input" />
             </div>
         </div>
+    </div>
 
-        <!-- QA name -->
-        <div class="clr-form-control clr-row">
-            <label for="qualityAssuranceName" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.qualityAssuranceName' | translate }}</label>
-            <div class="clr-control-container clr-col-12 clr-col-md-9">
-                <div class="clr-input-wrapper">
-                    <input type="text" id="qualityAssuranceName" formControlName="qualityAssuranceName" class="clr-input" />
-                </div>
+    <!-- BD name -->
+    <div class="clr-form-control clr-row">
+        <label for="businessDevelopmentName" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.businessDevelopmentName' | translate }}</label>
+        <div class="clr-control-container clr-col-12 clr-col-md-9">
+            <div class="clr-input-wrapper">
+                <input type="text" id="businessDevelopmentName" formControlName="businessDevelopmentName" class="clr-input" />
             </div>
         </div>
+    </div>
 
-        <!-- Project lead -->
-        <div class="clr-form-control clr-row">
-            <label for="projectLeadName" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.projectLeadName' | translate }}</label>
-            <div class="clr-control-container clr-col-12 clr-col-md-9">
-                <div class="clr-input-wrapper">
-                    <input type="text" id="projectLeadName" formControlName="projectLeadName" class="clr-input" />
-                </div>
+    <!-- QA name -->
+    <div class="clr-form-control clr-row">
+        <label for="qualityAssuranceName" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.qualityAssuranceName' | translate }}</label>
+        <div class="clr-control-container clr-col-12 clr-col-md-9">
+            <div class="clr-input-wrapper">
+                <input type="text" id="qualityAssuranceName" formControlName="qualityAssuranceName" class="clr-input" />
             </div>
         </div>
+    </div>
 
-        <!-- Client sponsor -->
-        <div class="clr-form-control clr-row">
-            <label for="clientSponsor" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.clientSponsor' | translate }}</label>
-            <div class="clr-control-container clr-col-12 clr-col-md-9">
-                <div class="clr-input-wrapper">
-                    <input type="text" id="clientSponsor" formControlName="clientSponsor" class="clr-input" />
-                </div>
+    <!-- Project lead -->
+    <div class="clr-form-control clr-row">
+        <label for="projectLeadName" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.projectLeadName' | translate }}</label>
+        <div class="clr-control-container clr-col-12 clr-col-md-9">
+            <div class="clr-input-wrapper">
+                <input type="text" id="projectLeadName" formControlName="projectLeadName" class="clr-input" />
             </div>
         </div>
+    </div>
 
-        <!-- VAA Returned -->
-        <div class="clr-form-control clr-row">
-            <label for="isVAAReturned" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.isVAAReturned' | translate }}</label>
-            <div class="clr-control-container clr-col-12 clr-col-md-9">
-                <div class="clr-input-wrapper">
-                    <input type="checkbox" id="isVAAReturned" formControlName="isVAAReturned" clrToggle />
-                </div>
+    <!-- Client sponsor -->
+    <div class="clr-form-control clr-row">
+        <label for="clientSponsor" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.clientSponsor' | translate }}</label>
+        <div class="clr-control-container clr-col-12 clr-col-md-9">
+            <div class="clr-input-wrapper">
+                <input type="text" id="clientSponsor" formControlName="clientSponsor" class="clr-input" />
             </div>
         </div>
-    </form>
-</ng-container>
+    </div>
+
+    <!-- VAA Returned -->
+    <div class="clr-form-control clr-row">
+        <label for="isVAAReturned" class="clr-control-label clr-col-12 clr-col-md-3">{{ 'feature.project.label.isVAAReturned' | translate }}</label>
+        <div class="clr-control-container clr-col-12 clr-col-md-9">
+            <div class="clr-input-wrapper">
+                <input type="checkbox" id="isVAAReturned" formControlName="isVAAReturned" clrToggle />
+            </div>
+        </div>
+    </div>
+</form>

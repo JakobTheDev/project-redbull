@@ -13,6 +13,13 @@
 <!-- Bottom icons -->
 <div class="clr-row">
     <div class="clr-col-12">
+        <!-- Methodology -->
+        <div (click)="navbarIconClicked(AppRoutes.METHODOLOGY)" [class.active]="isCurrentRoute(AppRoutes.METHODOLOGY)" class="clr-row navbar-icon">
+            <div class="clr-col-12">
+                <clr-icon shape="checkbox-list"></clr-icon>
+            </div>
+        </div>
+
         <!-- Settings -->
         <div (click)="navbarIconClicked(AppRoutes.SETTINGS)" [class.active]="isCurrentRoute(AppRoutes.SETTINGS)" class="clr-row navbar-icon">
             <div class="clr-col-12">

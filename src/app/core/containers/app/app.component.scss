@@ -17,7 +17,7 @@
     color: $base3;
 
     // branding icon and title
-    .branding a {
+    .branding {
         // disable app region to enable click events
         -webkit-app-region: no-drag;
         padding: 0 0.5rem;
