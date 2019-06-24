@@ -6,6 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./app-sidebar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppSidebarComponent {
-    constructor() {}
-}
+export class AppSidebarComponent {}

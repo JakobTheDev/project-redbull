@@ -12,7 +12,6 @@ export class LoadProject {
 
 export class LoadProjectList {
     static readonly type: string = '[Project] Load Project List';
-    constructor() {}
 }
 
 export class UpdateProjectList {
@@ -22,5 +21,4 @@ export class UpdateProjectList {
 
 export class RemoveProject {
     static readonly type: string = '[Project] Remove Project';
-    constructor() {}
 }
