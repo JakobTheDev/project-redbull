@@ -64,7 +64,7 @@ export class MethodologyState {
     @Action(LoadMethodology) loadMethodology({ patchState }: StateContext<MethodologyStateModel>, { payload }: LoadMethodology): void {
         this.electronService.fs.readFile(payload.path, 'utf8', (err: NodeJS.ErrnoException, data: string) => {
             // file doesn't exist, do nothing
-            if (err) alert(err.message);
+            // TODO handle errors
             // parse the data read from file
             const methodology: Methodology = !!data ? JSON.parse(data) : null;
             // patch th methodology list into the state
@@ -75,7 +75,7 @@ export class MethodologyState {
     @Action(LoadMethodologyList) loadMethodologyList({ patchState }: StateContext<MethodologyStateModel>): void {
         this.electronService.fs.readFile(`${this.electronService.userDataPath()}\\${environment.methodologiesFileName}`, 'utf8', (err: NodeJS.ErrnoException, data: string) => {
             // file doesn't exist, do nothing
-            if (err) alert(err.message);
+            // TODO handle errors
             // parse the data read from file
             const methodologyList: Array<MethodologyProperties> = JSON.parse(data) as Array<MethodologyProperties>;
             // first load methodology
@@ -91,7 +91,7 @@ export class MethodologyState {
         // update methodology properties list based on methodology details
         const methodologyList: Array<MethodologyProperties> = context.getState().methodologyList;
         const index: number = methodologyList.findIndex((methodology: MethodologyProperties) => methodology.id === payload.methodology.id);
-        // not speading into the object to drop irrelevant properties. // TODO: simplify
+        // not speading into the object to drop irrelevant properties.
         methodologyList[index] = {
             id: payload.methodology.id,
             path: payload.methodology.path,
@@ -104,40 +104,6 @@ export class MethodologyState {
         // write the methodologyList to file
         this.saveMethodologyProperties(methodologyList);
     }
-
-    // @Action(NewMethodologySection) newMethodologySection(context: StateContext<MethodologyStateModel>): void {
-    //     // get state
-    //     const state: MethodologyStateModel = context.getState();
-    //     const methodology: Methodology = state.methodology;
-    //     // create the new methodology
-    //     const newMethodologySection: MethodologySection = { id: Guid.create() };
-    //     // add methodology section to list
-    //     methodology.sections.push(newMethodologySection);
-    //     // patch state
-    //     context.patchState({ methodology });
-    //     // write to file
-    //     this.saveMethodology(methodology);
-    // }
-
-    // @Action(UpdateMethodology) updateMethodology(context: StateContext<MethodologyStateModel>, { payload }: UpdateMethodology): void {
-    //     // update methodology properties list based on methodology details
-    //     const methodologyList: Array<MethodologyProperties> = context.getState().methodologyList;
-    //     const index: number = methodologyList.findIndex((methodology: MethodologyProperties) => methodology.path === payload.methodology.path);
-    //     // not speading into the object to drop irrelevant properties. // TODO: simplify
-    //     methodologyList[index] = {
-    //         id: payload.methodology.id,
-    //         path: payload.methodology.path,
-    //         methodologyName: payload.methodology.methodologyName
-    //     };
-    //     // patch state
-    //     context.patchState({
-    //         methodology: payload.methodology,
-    //         methodologyList: [...methodologyList]
-    //     });
-    //     // write the methodologyList to file
-    //     this.saveMethodology(payload.methodology);
-    //     this.saveMethodologyProperties(methodologyList);
-    // }
 
     constructor(private readonly electronService: ElectronService, private readonly store: Store) {
         /**
@@ -162,7 +128,7 @@ export class MethodologyState {
         if (!!methodology && methodology.path)
             this.electronService.fs.writeFile(methodology.path, JSON.stringify(savePayload), (err: NodeJS.ErrnoException) => {
                 // user cancelled or something failed, abort
-                if (err) alert(err.message);
+                // TODO handle errors
             });
     }
 
@@ -173,7 +139,7 @@ export class MethodologyState {
     private saveMethodologyProperties(methodologyList: Array<MethodologyProperties>): void {
         this.electronService.fs.writeFile(`${this.electronService.userDataPath()}\\${environment.methodologiesFileName}`, JSON.stringify(methodologyList), (err: NodeJS.ErrnoException) => {
             // user cancelled or something failed, abort
-            if (err) alert(err.message);
+            // TODO handle errors
         });
     }
 }

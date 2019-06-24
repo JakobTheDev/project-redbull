@@ -1,5 +1,10 @@
 :first-child {
-    margin-top: 0;
-    margin-bottom: 4px;
-    margin-right: -8px;
+    h6 {
+        margin-top: 0;
+        margin-bottom: 4px;
+        margin-right: -8px;
+    }
+    button {
+        margin-right: -10px;
+    }
 }
