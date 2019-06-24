@@ -35,7 +35,7 @@ export class MethodologySidebarComponent {
             // create the new methodology file
             this.electronService.fs.writeFile(fileName, '', (err: any) => {
                 // user cancelled or something failed, abort
-                if (err) alert(err.message);
+                // TODO handle errors
                 // save new methodology to the store
                 this.store.dispatch(new NewMethodology({ path: fileName }));
             });
