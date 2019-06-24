@@ -16,7 +16,7 @@
     </div>
 
     <!-- Tasks -->
-    <div *ngFor="let task of sectionForm['controls'].tasks['controls']; let i = index" [formGroup]="task" class="clr-row clr-align-items-center">
+    <div *ngFor="let task of sectionForm['controls'].tasks['controls']; let i = index; trackBy: task.get('id').value" [formGroup]="task" class="clr-row clr-align-items-center">
         <div class="clr-col-auto">
             <h3>{{ task.get('id').value }}.</h3>
         </div>

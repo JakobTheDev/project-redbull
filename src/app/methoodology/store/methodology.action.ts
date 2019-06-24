@@ -8,12 +8,10 @@ export class NewMethodology {
 
 export class NewMethodologySection {
     static readonly type: string = '[Methodology] New Methodology Section';
-    constructor() {}
 }
 
 export class NewMethodologyTask {
     static readonly type: string = '[Methodology] New Methodology Task';
-    constructor() {}
 }
 
 // load methodology actions
@@ -31,7 +29,6 @@ export class LoadMethodology {
 // load methodology list actions
 export class LoadMethodologyList {
     static readonly type: string = '[Methodology] Load Methodology List';
-    constructor() {}
 }
 
 // update methodology list actions
