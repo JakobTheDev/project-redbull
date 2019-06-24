@@ -90,7 +90,7 @@ export class ProjectState {
         // update project properties list based on project details
         const projectList: Array<ProjectProperties> = context.getState().projectList;
         const index: number = projectList.findIndex((project: ProjectProperties) => project.id === payload.project.id);
-        // not speading into the object to drop irrelevant properties. // TODO: simplify
+        // not speading into the object to drop irrelevant properties.
         projectList[index] = {
             id: payload.project.id,
             path: payload.project.path,
@@ -122,29 +122,6 @@ export class ProjectState {
         if (projectList.length) this.store.dispatch(new LoadProject(projectList[0]));
     }
 
-    // @Action(UpdateProject) updateProject(context: StateContext<ProjectStateModel>, { payload }: UpdateProject): void {
-    //     // update project properties list based on project details
-    //     const projectList: Array<ProjectProperties> = context.getState().projectList;
-    //     const index: number = projectList.findIndex((project: ProjectProperties) => project.path === payload.project.path);
-    //     // not speading into the object to drop irrelevant properties. // TODO: simplify
-    //     projectList[index] = {
-    //         id: payload.project.id,
-    //         path: payload.project.path,
-    //         clientName: payload.project.clientName,
-    //         projectName: payload.project.projectName,
-    //         projectNumber: payload.project.projectNumber,
-    //         projectTitle: payload.project.projectTitle
-    //     };
-    //     // patch state
-    //     context.patchState({
-    //         project: payload.project,
-    //         projectList: [...projectList]
-    //     });
-    //     // write the projects to file
-    //     this.saveProject(payload.project);
-    //     this.saveProjectProperties(projectList);
-    // }
-
     constructor(private readonly electronService: ElectronService, private readonly store: Store) {
         /**
          * listen to form changes and write to file
@@ -163,14 +140,14 @@ export class ProjectState {
         const savePayload: Project | Object = project ? project : {};
         this.electronService.fs.writeFile(project.path, JSON.stringify(savePayload), (err: NodeJS.ErrnoException) => {
             // user cancelled or something failed, abort
-            if (err) alert(err.message);
+            // TODO handle errors
         });
     }
 
     private saveProjectProperties(projects: Array<ProjectProperties>): void {
         this.electronService.fs.writeFile(`${this.electronService.userDataPath()}\\${environment.projectsFileName}`, JSON.stringify(projects), (err: NodeJS.ErrnoException) => {
             // user cancelled or something failed, abort
-            if (err) alert(err.message);
+            // TODO handle errors
         });
     }
 }
