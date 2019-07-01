@@ -1,0 +1,17 @@
+<div [formGroup]="taskForm">
+    <!-- Task name -->
+    <div class="methodology-task-heading clr-row clr-align-items-end">
+        <div class="clr-col-auto">
+            <h4>{{ sectionForm?.get('sectionNumber').value }}.{{ taskForm?.get('taskNumber').value }}</h4>
+        </div>
+        <div class="clr-col">
+            <input type="text" id="taskName" formControlName="taskName" class="clr-input" />
+        </div>
+        <!-- Add task notes -->
+        <div class="clr-col-auto">
+            <button type="button" class="btn btn-icon btn-link" (click)="onEditTaskNotes()">
+                <clr-icon title="Edit task notes" shape="note"></clr-icon>
+            </button>
+        </div>
+    </div>
+</div>

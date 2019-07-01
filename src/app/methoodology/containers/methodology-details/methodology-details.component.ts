@@ -117,7 +117,7 @@ export class MethodologyDetailsComponent implements OnDestroy, OnInit {
         // patch the form
         sectionForm.patchValue(methodologySection);
         // add tasks to the section
-        if (methodologySection.tasks.length)
+        if (!!methodologySection.tasks && methodologySection.tasks.length)
             methodologySection.tasks.forEach((methodologyTask: MethodologyTask) => {
                 // create a form for the task
                 const taskForm: FormGroup = this.fb.group({
@@ -128,7 +128,7 @@ export class MethodologyDetailsComponent implements OnDestroy, OnInit {
                 // patch the form
                 taskForm.patchValue(methodologyTask);
                 // Add the new form to the FormArray
-                (sectionForm.controls.sections as FormArray).push(taskForm);
+                (sectionForm.controls.tasks as FormArray).push(taskForm);
             });
         // Add the new form to the FormArray
         (this.methodologyForm.controls.sections as FormArray).push(sectionForm);

@@ -10,10 +10,16 @@ import { Guid } from 'guid-typescript';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MethodologySectionComponent {
+    /**
+     * the form representing this section of the methodology
+     */
     @Input() sectionForm: FormGroup;
 
     constructor(private readonly fb: FormBuilder) {}
 
+    /**
+     * returns the number of tasks in the section
+     */
     getNumTasks = (): number => (this.sectionForm.controls.tasks as FormArray).controls.length;
 
     /**

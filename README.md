@@ -1,5 +1,7 @@
 # Project RedBull
 
+[![Build Status](https://travis-ci.com/JakobRPennington/project-redbull.svg?token=GLjYYizxibAhdwgYTTkB&branch=master)](https://travis-ci.com/JakobRPennington/project-redbull)
+
 ## Included Commands
 
 | Command                    | Description                                                                                                 |

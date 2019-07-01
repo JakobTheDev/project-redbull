@@ -19,14 +19,14 @@
     <!-- Path subtitle -->
     <div class="clr-form-control clr-row path">
         <div class="clr-control-container clr-col-12 clr-col-md-9">
-            <p class="path">{{ methodologyForm.get('path').value }}</p>
+            <p class="path">{{ methodologyForm?.get('path').value }}</p>
         </div>
     </div>
 
     <!-- Methodology sections -->
     <div [dragula]="DRAGULA_METHODOLOGY_SECTION" class="methodology-section-wrapper" [(dragulaModel)]="methodologyForm['controls'].sections['controls']">
         <redbull-methodology-section
-            *ngFor="let section of methodologyForm['controls'].sections['controls']; let i = index; trackBy: section.get('id').value"
+            *ngFor="let section of methodologyForm['controls'].sections['controls']; let i = index; trackBy: section?.get('id').value"
             [sectionForm]="section"
         ></redbull-methodology-section>
     </div>

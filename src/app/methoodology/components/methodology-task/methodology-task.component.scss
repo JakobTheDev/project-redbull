@@ -1,12 +1,13 @@
 // Import global stylesheet
 @import '_variables.scss';
 
-.methodology-section-heading {
-    min-height: $redbull-list-height;
+.methodology-task-heading {
+    min-height: $redbull-list-height-small;
 }
 
-h3 {
+h4 {
     margin-top: 0px;
+    margin-left: 50px;
     width: 20px;
 }
 

@@ -1,8 +1,8 @@
-<div [formGroup]="sectionForm" class="clr-row methodology-section">
-    <!-- Section name -->
-    <div class="clr-row clr-align-items-center">
+<div [formGroup]="sectionForm">
+    <div class="methodology-section-heading clr-row clr-align-items-end">
+        <!-- Section name -->
         <div class="clr-col-auto">
-            <h3>{{ sectionForm.get('sectionNumber').value }}.</h3>
+            <h3>{{ sectionForm?.get('sectionNumber').value }}.</h3>
         </div>
         <div class="clr-col">
             <input type="text" id="sectionName" formControlName="sectionName" class="clr-input" />
@@ -16,9 +16,9 @@
     </div>
 
     <!-- Tasks -->
-    <div *ngFor="let task of sectionForm['controls'].tasks['controls']; let i = index; trackBy: task.get('id').value" [formGroup]="task" class="clr-row clr-align-items-center">
-        <div class="clr-col-auto">
-            <h3>{{ task.get('id').value }}.</h3>
-        </div>
-    </div>
+    <redbull-methodology-task
+        *ngFor="let task of sectionForm['controls'].tasks['controls']; let i = index; trackBy: task?.get('id').value"
+        [sectionForm]="sectionForm"
+        [taskForm]="task"
+    ></redbull-methodology-task>
 </div>
