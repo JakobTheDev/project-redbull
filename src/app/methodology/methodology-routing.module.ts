@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MethodologyComponent } from 'app/methoodology/containers/methodology/methodology.component';
+import { MethodologyComponent } from 'app/methodology/containers/methodology/methodology.component';
 import { AppRoutes } from 'app/shared/models/app-routes.model';
 
 const routes: Routes = [
@@ -14,4 +14,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class MethoodologyRoutingModule {}
+export class MethodologyRoutingModule {}

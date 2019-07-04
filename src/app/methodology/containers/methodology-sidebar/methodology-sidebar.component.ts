@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { LoadMethodology, NewMethodology } from 'app/methoodology/store/methodology.action';
-import { MethodologyState } from 'app/methoodology/store/methodology.state';
+import { LoadMethodology, NewMethodology } from 'app/methodology/store/methodology.action';
+import { MethodologyState } from 'app/methodology/store/methodology.state';
 import { methodologyFileFilters } from 'app/shared/models/file-filters.model';
 import { Methodology, MethodologyProperties } from 'app/shared/models/methodology.model';
 import { ElectronService } from 'app/shared/services/electron.service';

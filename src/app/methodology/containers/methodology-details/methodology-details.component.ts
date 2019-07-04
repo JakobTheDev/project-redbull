@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { MethodologyState } from 'app/methoodology/store/methodology.state';
+import { MethodologyState } from 'app/methodology/store/methodology.state';
 import { Methodology, MethodologySection, MethodologyTask } from 'app/shared/models/methodology.model';
 import { Guid } from 'guid-typescript';
 import { DragulaService } from 'ng2-dragula';

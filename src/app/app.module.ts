@@ -8,7 +8,7 @@ import { NgxsModule } from '@ngxs/store';
 import { AppNavbarComponent } from 'app/core/containers/app-navbar/app-navbar.component';
 import { AppComponent } from 'app/core/containers/app/app.component';
 import { CoreModule } from 'app/core/core.module';
-import { MethodologyModule } from 'app/methoodology/methodology.module';
+import { MethodologyModule } from 'app/methodology/methodology.module';
 import { ProjectModule } from 'app/project/project.module';
 import { SettingsModule } from 'app/settings/settings.module';
 import { TranslateModule } from 'app/shared-modules/translate/translate.module';
@@ -17,6 +17,7 @@ import { ElectronService } from 'app/shared/services/electron.service';
 import { environment } from 'environments/environment';
 import { DragulaModule } from 'ng2-dragula';
 import { AppRoutingModule } from './app-routing.module';
+import { TestModule } from './test/test.module';
 
 @NgModule({
     declarations: [AppComponent, AppNavbarComponent, WebviewDirective],
@@ -48,7 +49,8 @@ import { AppRoutingModule } from './app-routing.module';
         CoreModule,
         ProjectModule,
         MethodologyModule,
-        SettingsModule
+        SettingsModule,
+        TestModule
     ],
     providers: [ElectronService],
     bootstrap: [AppComponent]
