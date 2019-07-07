@@ -3,8 +3,8 @@
  */
 export interface MethodologyProperties {
     id: string;
-    path: string;
-    methodologyName?: string;
+    path?: string;
+    name?: string;
     dateCreated?: Date;
 }
 

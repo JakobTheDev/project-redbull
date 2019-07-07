@@ -12,7 +12,7 @@
 <redbull-sidebar-list-item
     *ngFor="let methodology of methodologyList$ | async; trackBy: trackByMethodology"
     [selected]="methodology.path === (methodology$ | async)?.path"
-    [title]="methodology.methodologyName"
+    [title]="methodology.name"
     [subtitle]="methodology.path"
     (click)="onMethodologySelected(methodology)"
 ></redbull-sidebar-list-item>

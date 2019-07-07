@@ -17,14 +17,8 @@ export class NewMethodologyTask {
 // load methodology actions
 export class LoadMethodology {
     static readonly type: string = '[Methodology] Load Methodology';
-    constructor(readonly payload: { path: string }) {}
+    constructor(readonly payload: { id: string }) {}
 }
-
-// update methodology actions
-// export class UpdateMethodology {
-//     static readonly type: string = '[Methodology] Update Methodology';
-//     constructor(readonly payload: { methodology: Methodology }) {}
-// }
 
 // load methodology list actions
 export class LoadMethodologyList {

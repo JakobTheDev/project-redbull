@@ -10,8 +10,16 @@ export class LoadProject {
     constructor(readonly payload: { path: string }) {}
 }
 
+export class SaveProject {
+    static readonly type: string = '[Project] Save Project';
+}
+
 export class LoadProjectList {
     static readonly type: string = '[Project] Load Project List';
+}
+
+export class SaveProjectList {
+    static readonly type: string = '[Project] Save Project List';
 }
 
 export class UpdateProjectList {

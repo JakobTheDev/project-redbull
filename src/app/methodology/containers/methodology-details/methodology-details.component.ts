@@ -32,7 +32,7 @@ export class MethodologyDetailsComponent implements OnDestroy, OnInit {
     methodologyForm: FormGroup = new FormGroup({
         id: new FormControl(null),
         path: new FormControl(''),
-        methodologyName: new FormControl(''),
+        name: new FormControl(''),
         dateCreated: new FormControl(''),
         sections: this.fb.array([])
     });

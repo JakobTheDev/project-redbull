@@ -48,7 +48,7 @@ export class MethodologyState {
         // get state
         const state: MethodologyStateModel = context.getState();
         // create the new methodology
-        const newMethodology: Methodology = { id: Guid.raw(), path: payload.path, dateCreated: new Date(), methodologyName: STRING_NEW_METHODOLOGY };
+        const newMethodology: Methodology = { id: Guid.raw(), path: payload.path, dateCreated: new Date(), name: STRING_NEW_METHODOLOGY };
         // add methodology to list
         const methodologyList: Array<MethodologyProperties> = [...state.methodologyList, newMethodology];
         // patch state
@@ -61,15 +61,21 @@ export class MethodologyState {
         this.saveMethodologyProperties(methodologyList);
     }
 
-    @Action(LoadMethodology) loadMethodology({ patchState }: StateContext<MethodologyStateModel>, { payload }: LoadMethodology): void {
-        this.electronService.fs.readFile(payload.path, 'utf8', (err: NodeJS.ErrnoException, data: string) => {
-            // file doesn't exist, do nothing
-            // TODO handle errors
-            // parse the data read from file
-            const methodology: Methodology = !!data ? JSON.parse(data) : null;
-            // patch th methodology list into the state
-            patchState({ methodology });
-        });
+    @Action(LoadMethodology) loadMethodology(context: StateContext<MethodologyStateModel>, { payload }: LoadMethodology): void {
+        // get state
+        const state: MethodologyStateModel = context.getState();
+        // get the selected methodology
+        const selectedMethodology: MethodologyProperties = state.methodologyList.find((methodologyProperties: MethodologyProperties) => methodologyProperties.id === payload.id);
+        // load the full methodology from file
+        if (selectedMethodology)
+            this.electronService.fs.readFile(selectedMethodology.path, 'utf8', (err: NodeJS.ErrnoException, data: string) => {
+                // file doesn't exist, do nothing
+                // TODO handle errors
+                // parse the data read from file
+                const methodology: Methodology = !!data ? JSON.parse(data) : null;
+                // patch th methodology list into the state
+                context.patchState({ methodology });
+            });
     }
 
     @Action(LoadMethodologyList) loadMethodologyList({ patchState }: StateContext<MethodologyStateModel>): void {
@@ -77,9 +83,9 @@ export class MethodologyState {
             // file doesn't exist, do nothing
             // TODO handle errors
             // parse the data read from file
-            const methodologyList: Array<MethodologyProperties> = JSON.parse(data) as Array<MethodologyProperties>;
+            const methodologyList: Array<MethodologyProperties> = !!data ? (JSON.parse(data) as Array<MethodologyProperties>) : [];
             // first load methodology
-            if (methodologyList.length) this.store.dispatch(new LoadMethodology({ path: methodologyList[0].path }));
+            if (methodologyList.length) this.store.dispatch(new LoadMethodology({ id: methodologyList[0].id }));
             // patch th methodology list into the state
             patchState({ methodologyList });
         });
@@ -95,7 +101,7 @@ export class MethodologyState {
         methodologyList[index] = {
             id: payload.methodology.id,
             path: payload.methodology.path,
-            methodologyName: payload.methodology.methodologyName
+            name: payload.methodology.name
         };
         // patch state
         context.patchState({

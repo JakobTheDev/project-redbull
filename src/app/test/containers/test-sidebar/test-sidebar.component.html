@@ -8,3 +8,25 @@
         </button>
     </div>
 </div>
+
+<redbull-sidebar-list-item *ngFor="let test of testList$ | async; trackBy: trackByTest" [title]="test?.name" [subtitle]="test?.id"></redbull-sidebar-list-item>
+
+<!-- Modal -->
+<clr-modal [(clrModalOpen)]="showNewTestModal">
+    <h3 class="modal-title">Select a Methodology</h3>
+    <div class="modal-body">
+        <p>Which methodology would you like to use for this test?</p>
+        <form [formGroup]="testForm" class="clr-form clr-form-horizontal">
+            <clr-select-container>
+                <label>Methodology</label>
+                <select clrSelect name="methodology" formControlName="methodology">
+                    <option *ngFor="let methodology of methodologyList$ | async; trackBy: trackByMethodology" [ngValue]="methodology.id">{{ methodology.name }}</option>
+                </select>
+            </clr-select-container>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="onModalCancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onModalCreate()">Create</button>
+    </div>
+</clr-modal>

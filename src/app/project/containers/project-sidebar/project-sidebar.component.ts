@@ -14,7 +14,9 @@ import { Observable } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectSidebarComponent {
-    // store observables
+    /**
+     * store observables
+     */
     project$: Observable<Project>;
     projectList$: Observable<Array<ProjectProperties>>;
 
@@ -45,5 +47,5 @@ export class ProjectSidebarComponent {
     }
 
     // trackBy functions
-    trackByProject = (index: number, projectProperties: ProjectProperties) => projectProperties.path;
+    trackByProject = (index: number, projectProperties: ProjectProperties) => projectProperties.id;
 }

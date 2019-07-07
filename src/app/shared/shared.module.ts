@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClarityModule } from '@clr/angular';
 import { TranslateModule } from 'app/shared-modules/translate/translate.module';
 import { AppContentComponent } from 'app/shared/components/app-content/app-content.component';
@@ -9,7 +10,7 @@ import { SidebarListItemComponent } from './components/sidebar-list-item/sidebar
 
 @NgModule({
     declarations: [AppContentComponent, AppSidebarComponent, SidebarListItemComponent],
-    imports: [CommonModule, TranslateModule, ReactiveFormsModule, ClarityModule],
+    imports: [CommonModule, TranslateModule, ReactiveFormsModule, BrowserAnimationsModule, ClarityModule],
     exports: [CommonModule, TranslateModule, ReactiveFormsModule, ClarityModule, AppContentComponent, AppSidebarComponent, SidebarListItemComponent]
 })
 export class SharedModule {}

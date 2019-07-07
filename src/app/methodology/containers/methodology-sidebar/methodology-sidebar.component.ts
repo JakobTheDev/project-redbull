@@ -48,7 +48,7 @@ export class MethodologySidebarComponent {
      */
     onMethodologySelected(methodologyProperties: MethodologyProperties): void {
         // load methodology
-        this.store.dispatch(new LoadMethodology({ path: methodologyProperties.path }));
+        this.store.dispatch(new LoadMethodology({ id: methodologyProperties.id }));
     }
 
     /**
