@@ -74,7 +74,7 @@ export class MethodologyDetailsComponent implements OnDestroy, OnInit {
                 // reconstruct the sections forms in the updated order
                 args.targetModel.forEach((sectionForm: FormGroup, index: number) => {
                     const methodologySection: MethodologySection = sectionForm.value;
-                    methodologySection.sectionNumber = index + 1;
+                    methodologySection.number = index + 1;
                     this.addMethodologySection(methodologySection);
                 });
                 // fire change detection
@@ -100,7 +100,7 @@ export class MethodologyDetailsComponent implements OnDestroy, OnInit {
      *  create a new methodology section
      */
     newMethodologySection(): void {
-        this.addMethodologySection({ id: Guid.raw(), sectionNumber: this.getNumSections() + 1 });
+        this.addMethodologySection({ id: Guid.raw(), number: this.getNumSections() + 1 });
     }
 
     /**
@@ -110,8 +110,8 @@ export class MethodologyDetailsComponent implements OnDestroy, OnInit {
         // create a form for the section
         const sectionForm: FormGroup = this.fb.group({
             id: [null],
-            sectionName: [''],
-            sectionNumber: [0],
+            name: [''],
+            number: [0],
             tasks: this.fb.array([])
         });
         // patch the form
@@ -122,8 +122,8 @@ export class MethodologyDetailsComponent implements OnDestroy, OnInit {
                 // create a form for the task
                 const taskForm: FormGroup = this.fb.group({
                     id: [null],
-                    taskName: [''],
-                    taskNumber: [0]
+                    name: [''],
+                    number: [0]
                 });
                 // patch the form
                 taskForm.patchValue(methodologyTask);

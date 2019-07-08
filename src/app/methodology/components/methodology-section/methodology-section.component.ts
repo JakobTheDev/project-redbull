@@ -26,7 +26,7 @@ export class MethodologySectionComponent {
      *  create a new methodology task
      */
     newMethodologyTask(): void {
-        this.addMethodologyTask({ id: Guid.raw(), taskNumber: this.getNumTasks() + 1 });
+        this.addMethodologyTask({ id: Guid.raw(), number: this.getNumTasks() + 1 });
     }
 
     /**
@@ -36,8 +36,8 @@ export class MethodologySectionComponent {
         // create a form for the task
         const taskForm: FormGroup = this.fb.group({
             id: [null],
-            taskName: [''],
-            taskNumber: [0]
+            name: [''],
+            number: [0]
         });
         // patch the form
         taskForm.patchValue(methodologyTask);

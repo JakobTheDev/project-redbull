@@ -9,7 +9,16 @@
     </div>
 </div>
 
-<redbull-sidebar-list-item *ngFor="let test of testList$ | async; trackBy: trackByTest" [title]="test?.name" [subtitle]="test?.id"></redbull-sidebar-list-item>
+<!-- Test / Section / Task tree view-->
+<clr-tree-node *ngFor="let test of testList$ | async; trackBy: trackByTest" [(clrExpanded)]="test.expanded">
+    <a [routerLink]="['/test/overview', test.id]" class="clr-treenode-link" routerLinkActive="active">{{ test.name }}</a>
+    <clr-tree-node *ngFor="let section of test.sections" [(clrExpanded)]="section.expanded">
+        <a [routerLink]="['/test/section', section.id]" class="clr-treenode-link" routerLinkActive="active">{{ section.name }}</a>
+        <clr-tree-node *ngFor="let task of section.tasks">
+            <a [routerLink]="['/test/task', task.id]" class="clr-treenode-link" routerLinkActive="active">{{ task.name }}</a>
+        </clr-tree-node>
+    </clr-tree-node>
+</clr-tree-node>
 
 <!-- Modal -->
 <clr-modal [(clrModalOpen)]="showNewTestModal">

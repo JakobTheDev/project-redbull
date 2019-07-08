@@ -11,6 +11,13 @@
     text-overflow: ellipsis;
 }
 
+/**
+ * Clarity overrides
+ */
+.clr-treenode-content {
+    @extend .truncate;
+}
+
 // dragula styles
 /* in-flight clone */
 .gu-mirror {
