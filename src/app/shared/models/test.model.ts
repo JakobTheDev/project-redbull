@@ -5,5 +5,5 @@ export interface Test extends Methodology {
     id: string;
     name: string;
     // track whether tree view is expanded
-    expanded: string;
+    expanded?: string;
 }

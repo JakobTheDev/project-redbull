@@ -45,7 +45,7 @@ import { TestModule } from './test/test.module';
         AppRoutingModule,
 
         // Import applications modules
-        // No lazy-loading doue to electron app
+        // No lazy-loading due to electron app
         CoreModule,
         ProjectModule,
         MethodologyModule,

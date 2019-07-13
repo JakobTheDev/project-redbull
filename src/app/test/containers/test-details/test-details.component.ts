@@ -6,4 +6,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./test-details.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TestDetailsComponent {}
+export class TestDetailsComponent {
+    // Froala config
+    options: Object = {
+        attribution: false,
+        toolbarInline: true
+    };
+}

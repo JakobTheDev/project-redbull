@@ -1,5 +1,5 @@
 // Import global stylesheet
-@import '_variables.scss';
+@import 'abstracts/variables.scss';
 
 .main-container {
     max-height: 100%;
@@ -88,4 +88,5 @@
 .clr-col,
 .clr-col-auto {
     padding: 0px;
+    max-height: 100%;
 }

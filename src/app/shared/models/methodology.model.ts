@@ -8,7 +8,7 @@ export interface MethodologyProperties {
     path?: string;
     dateCreated?: Date;
     // track whether tree view is expanded
-    expanded: string;
+    expanded?: string;
 }
 
 /**
@@ -28,7 +28,7 @@ export interface MethodologySection {
     number?: number;
     tasks?: Array<MethodologyTask>;
     // track whether tree view is expanded
-    expanded: string;
+    expanded?: string;
 }
 
 /**
@@ -40,5 +40,5 @@ export interface MethodologyTask {
     name?: string;
     number?: number;
     // track whether tree view is expanded
-    expanded: string;
+    expanded?: string;
 }
