@@ -16,6 +16,8 @@ export interface MethodologyProperties {
  */
 export interface Methodology extends MethodologyProperties {
     sections?: Array<MethodologySection>;
+    methodologyNotes?: string;
+    testNotes?: string;
 }
 
 /**
@@ -26,6 +28,8 @@ export interface MethodologySection {
     id: string;
     name?: string;
     number?: number;
+    methodologyNotes?: string;
+    testNotes?: string;
     tasks?: Array<MethodologyTask>;
     // track whether tree view is expanded
     expanded?: string;
@@ -39,6 +43,8 @@ export interface MethodologyTask {
     id: string;
     name?: string;
     number?: number;
+    methodologyNotes?: string;
+    testNotes?: string;
     // track whether tree view is expanded
     expanded?: string;
 }

@@ -1,19 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { Test } from 'app/shared/models/test.model';
-import { SelectTest } from 'app/test/store/test.action';
+import { MethodologySection } from 'app/shared/models/methodology.model';
+import { SelectSection } from 'app/test/store/test.action';
 import { TestState } from 'app/test/store/test.state';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'redbull-test-details',
-    templateUrl: './test-details.component.html',
-    styleUrls: ['./test-details.component.scss'],
+    selector: 'redbull-test-section-details',
+    templateUrl: './test-section-details.component.html',
+    styleUrls: ['./test-section-details.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TestDetailsComponent implements OnDestroy {
+export class TestSectionDetailsComponent implements OnDestroy {
     /**
      * unsubscrive brom component observables
      */
@@ -22,15 +22,15 @@ export class TestDetailsComponent implements OnDestroy {
     /**
      * observable to the selected test
      */
-    test$: Observable<Test>;
+    section$: Observable<MethodologySection>;
 
-    constructor(private readonly cdRef: ChangeDetectorRef, private readonly route: ActivatedRoute, private readonly store: Store) {
+    constructor(private readonly route: ActivatedRoute, private readonly store: Store) {
         // load test into store based on route param
         this.route.params.pipe(takeUntil(this.unsubscribed$)).subscribe((params: Params) => {
-            this.store.dispatch(new SelectTest({ id: params.id }));
+            this.store.dispatch(new SelectSection({ id: params.id }));
         });
         // subscribe to test state
-        this.test$ = this.store.select(TestState.test);
+        this.section$ = this.store.select(TestState.section);
     }
 
     ngOnDestroy(): void {
