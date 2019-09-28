@@ -1,0 +1,13 @@
+<!-- heading -->
+<div class="clr-row">
+    <div class="clr-col-auto">
+        <h2>{{ task?.name }}</h2>
+    </div>
+</div>
+
+<!-- text editor-->
+<div [formGroup]="taskForm" class="clr-row froala-wrapper">
+    <div class="clr-col-12">
+        <div [froalaEditor]="options" formControlName="testNotes"></div>
+    </div>
+</div>

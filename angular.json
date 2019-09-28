@@ -17,11 +17,20 @@
                         "tsConfig": "src/tsconfig.app.json",
                         "polyfills": "src/polyfills.ts",
                         "assets": ["src/assets", "src/favicon.ico", "src/favicon.png", "src/favicon.icns", "src/favicon.256x256.png", "src/favicon.512x512.png"],
-                        "styles": ["node_modules/@clr/icons/clr-icons.min.css", "node_modules/@clr/ui/clr-ui-dark.min.css", "src/styles.scss"],
+                        "styles": [
+                            "node_modules/@clr/icons/clr-icons.min.css",
+                            "node_modules/@clr/ui/clr-ui-dark.min.css",
+                            "node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+                            "src/styles.scss"
+                        ],
                         "stylePreprocessorOptions": {
                             "includePaths": ["src/app/shared/styles"]
                         },
-                        "scripts": ["node_modules/@webcomponents/custom-elements/custom-elements.min.js", "node_modules/@clr/icons/clr-icons.min.js"]
+                        "scripts": [
+                            "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
+                            "node_modules/@clr/icons/clr-icons.min.js",
+                            "node_modules/froala-editor/js/froala_editor.pkgd.min.js"
+                        ]
                     },
                     "configurations": {
                         "dev": {

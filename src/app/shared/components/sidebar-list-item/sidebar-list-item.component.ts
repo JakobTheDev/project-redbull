@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'redbull-sidebar-list-item',
@@ -7,7 +7,18 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarListItemComponent {
+    /**
+     * title of the list item
+     */
     @Input() title: string;
+
+    /**
+     * subtitle of the list item
+     */
     @Input() subtitle: string;
+
+    /**
+     * whether the list item is currently selected
+     */
     @Input() selected: boolean;
 }

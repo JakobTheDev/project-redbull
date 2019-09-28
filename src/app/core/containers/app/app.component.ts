@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { LoadMethodologyList } from 'app/methoodology/store/methodology.action';
+import { LoadMethodologyList } from 'app/methodology/store/methodology.action';
 import { LoadProjectList } from 'app/project/store/project.action';
 import { ProjectState } from 'app/project/store/project.state';
 import { Project } from 'app/shared/models/project.model';

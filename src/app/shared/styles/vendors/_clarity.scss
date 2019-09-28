@@ -1,0 +1,6 @@
+/**
+ * Clarity overrides
+ */
+.clr-treenode-content {
+    @extend .truncate;
+}

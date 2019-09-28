@@ -1,0 +1,18 @@
+// Import global stylesheet
+@import 'abstracts/variables.scss';
+
+.methodology-section-heading {
+    min-height: $redbull-list-height;
+}
+
+h3 {
+    margin-top: 0px;
+    width: 20px;
+}
+
+input {
+    font-size: 18px;
+    max-height: 2rem;
+    height: 2rem;
+    width: 100%;
+}
