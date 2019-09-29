@@ -1,17 +1,55 @@
 # Project RedBull
-
+![GitHub package.json version](https://img.shields.io/github/package-json/v/JakobRPennington/project-redbull)
 [![Build Status](https://travis-ci.com/JakobRPennington/project-redbull.svg?token=GLjYYizxibAhdwgYTTkB&branch=master)](https://travis-ci.com/JakobRPennington/project-redbull)
+[![Known Vulnerabilities](https://snyk.io/test/github/JakobRPennington/project-redbull/badge.svg)](https://snyk.io/test/github/JakobRPennington/project-redbull)
 
-## Included Commands
+[![Angular](https://img.shields.io/badge/Angular-8.2.0-blue)](https://update.angular.io)
+[![node](https://img.shields.io/badge/node->10.9.0-blue)](https://nodejs.org/en/)
 
-| Command                    | Description                                                                                                 |
+# Introduction
+
+Project Redbull is a methodology and notetaking tool for penetration testers and bug bounty hunters.
+
+Redbull currently runs with:
+* Angular v8.2.8
+* Electron v6.0.10
+* Node v10.9.0 or later
+
+## Getting Started
+
+Before running the project locally, you'll need to install:  
+* Node v10.9.0 or later available [here](https://nodejs.org/en/) (or using nvm)
+
+Install the Angular CLI:
+```bash
+npm install -g @angular/cli
+```
+
+Clone this repository:  
+```bash
+git clone https://github.com/JakobRPennington/project-redbull.git
+```
+
+Install dependencies with npm:
+```bash
+cd project-redbull
+npm install
+```
+
+## Development
+
+Some npm scripts have been created to help with development. Simply run `npm run` to run the app with hot-reloading.
+
+| Development Commands       | Description                                                                                                 |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `npm start`                | Run the application locally.                                                                                |
-| `npm run build`            | Build the app. Your built files are in the /dist folder.                                                    |
-| `npm run build:prod`       | Build the app with Angular aot. Your built files are in the /dist folder.                                   |
-| `npm run electron:local`   | Builds your application and start electron                                                                  |
-| `npm run electron:linux`   | Builds your application and creates an app consumable on linux system                                       |
-| `npm run electron:windows` | On a Windows OS, builds your application and creates an app consumable in windows 32/64 bit systems         |
-| `npm run electron:mac`     | On a MAC OS, builds your application and generates a `.app` file of your application that can be run on Mac |
+| `npm run commit`           | Fin this after `git add`ing files to commit changes (required to commit, runs linting and commitizen).      |
 
-**Your application is optimised. Only /dist folder and node dependencies are included in the executable.**
+
+| Build Commands             | Description                                                                                                 |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `npm run electron:local`   | Builds the application and starts electron.                                                                 |
+| `npm run electron:linux`   | Builds the application and creates an app consumable on linux system.                                       |
+| `npm run electron:windows` | On a Windows OS, builds your application and creates an app consumable in windows 32/64 bit systems.        |
+| `npm run electron:mac`     | On a MAC OS, builds your application and generates a `.app` file of your application that can be run on Mac.|
+

@@ -5,6 +5,7 @@ import { MethodologyState } from 'app/methodology/store/methodology.state';
 import { methodologyFileFilters } from 'app/shared/models/file-filters.model';
 import { Methodology, MethodologyProperties } from 'app/shared/models/methodology.model';
 import { ElectronService } from 'app/shared/services/electron.service';
+import { SaveDialogReturnValue } from 'electron';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -27,17 +28,17 @@ export class MethodologySidebarComponent {
      * create a new methodology
      */
     newMethodology(): void {
-        this.electronService.remote.dialog.showSaveDialog({ filters: methodologyFileFilters }, (fileName: any) => {
+        this.electronService.remote.dialog.showSaveDialog({ filters: methodologyFileFilters }).then((saveDialogReturnValue: SaveDialogReturnValue) => {
             // user cancelled or something failed, abort
-            if (fileName === undefined) {
-                return;
+            if (saveDialogReturnValue.canceled || saveDialogReturnValue.filePath === undefined) {
+                return undefined;
             }
             // create the new methodology file
-            this.electronService.fs.writeFile(fileName, '', (err: any) => {
+            this.electronService.fs.writeFile(saveDialogReturnValue.filePath, '', (err: any) => {
                 // user cancelled or something failed, abort
                 // TODO handle errors
                 // save new methodology to the store
-                this.store.dispatch(new NewMethodology({ path: fileName }));
+                this.store.dispatch(new NewMethodology({ path: saveDialogReturnValue.filePath }));
             });
         });
     }
