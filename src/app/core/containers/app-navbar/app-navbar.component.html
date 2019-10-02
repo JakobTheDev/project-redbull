@@ -2,9 +2,16 @@
 <div class="clr-row">
     <div class="clr-col-12">
         <!-- Project -->
-        <div (click)="navbarIconClicked(AppRoutes.PROJECT)" [class.active]="isCurrentRoute(AppRoutes.PROJECT)" class="clr-row navbar-icon">
+        <div [title]="AppRoutes.PROJECT | titlecase" (click)="navbarIconClicked(AppRoutes.PROJECT)" [class.active]="isCurrentRoute(AppRoutes.PROJECT)" class="clr-row navbar-icon">
             <div class="clr-col-12">
                 <clr-icon shape="pinboard"></clr-icon>
+            </div>
+        </div>
+
+        <!-- Test -->
+        <div [title]="AppRoutes.TEST | titlecase" (click)="navbarIconClicked(AppRoutes.TEST)" [class.active]="isCurrentRoute(AppRoutes.TEST)" class="clr-row navbar-icon">
+            <div class="clr-col-12">
+                <clr-icon shape="flask"></clr-icon>
             </div>
         </div>
     </div>
@@ -14,14 +21,14 @@
 <div class="clr-row">
     <div class="clr-col-12">
         <!-- Methodology -->
-        <div (click)="navbarIconClicked(AppRoutes.METHODOLOGY)" [class.active]="isCurrentRoute(AppRoutes.METHODOLOGY)" class="clr-row navbar-icon">
+        <div [title]="AppRoutes.METHODOLOGY | titlecase" (click)="navbarIconClicked(AppRoutes.METHODOLOGY)" [class.active]="isCurrentRoute(AppRoutes.METHODOLOGY)" class="clr-row navbar-icon">
             <div class="clr-col-12">
                 <clr-icon shape="checkbox-list"></clr-icon>
             </div>
         </div>
 
         <!-- Settings -->
-        <div (click)="navbarIconClicked(AppRoutes.SETTINGS)" [class.active]="isCurrentRoute(AppRoutes.SETTINGS)" class="clr-row navbar-icon">
+        <div [title]="AppRoutes.SETTINGS | titlecase" (click)="navbarIconClicked(AppRoutes.SETTINGS)" [class.active]="isCurrentRoute(AppRoutes.SETTINGS)" class="clr-row navbar-icon">
             <div class="clr-col-12">
                 <clr-icon shape="cog"></clr-icon>
             </div>

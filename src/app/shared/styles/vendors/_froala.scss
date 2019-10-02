@@ -1,0 +1,14 @@
+/**
+ * Froala styling
+ */
+.froala-wrapper {
+    border: $redbull-border-width solid $base03;
+    border-radius: $redbull-border-radius-sm;
+    padding: $redbull-content-padding 0px;
+}
+.fr-wrapper .fr-element {
+    min-height: $redbull-input-area-height;
+    p {
+        margin-top: 0px;
+    }
+}

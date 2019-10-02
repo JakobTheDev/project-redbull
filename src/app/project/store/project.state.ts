@@ -1,8 +1,11 @@
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { LoadProject, LoadProjectList, NewProject, RemoveProject, UpdateProjectList } from 'app/project/store/project.action';
+import { append, patch } from '@ngxs/store/operators';
+import { LoadProject, LoadProjectList, NewProject, RemoveProject, SaveProject, SaveProjectList, UpdateProjectList } from 'app/project/store/project.action';
 import { NgxsForm } from 'app/shared/models/ngxs-form.model';
+import { ProjectSave } from 'app/shared/models/project-save.model';
 import { Project, ProjectProperties } from 'app/shared/models/project.model';
 import { ElectronService } from 'app/shared/services/electron.service';
+import { TestState, TestStateModel } from 'app/test/store/test.state';
 import { environment } from 'environments/environment';
 import { Guid } from 'guid-typescript';
 
@@ -13,6 +16,7 @@ export interface ProjectStateModel {
     project: Project;
     projectList: Array<ProjectProperties>;
     projectForm: NgxsForm;
+    testState: TestStateModel;
 }
 
 // state class
@@ -26,8 +30,10 @@ export interface ProjectStateModel {
             dirty: false,
             status: '',
             errors: {}
-        }
-    }
+        },
+        testState: null
+    },
+    children: [TestState]
 })
 export class ProjectState {
     // selectors
@@ -45,21 +51,18 @@ export class ProjectState {
 
     // actions
     @Action(NewProject) newProject(context: StateContext<ProjectStateModel>, { payload }: NewProject): void {
-        // get state
-        const state: ProjectStateModel = context.getState();
         // create the new project
         const newProject: Project = { id: Guid.raw(), path: payload.path, dateCreated: new Date(), projectTitle: STRING_NEW_PROJECT_TITLE };
-        // add project to list
-        const projectList: Array<ProjectProperties> = [...state.projectList, newProject];
         // patch state
-        context.patchState({
-            project: newProject,
-            projectList: [...projectList]
-        });
-        // write to file
+        context.setState(
+            patch({
+                project: newProject,
+                projectList: append([newProject])
+            })
+        );
         // write the projects to file
-        this.saveProject(newProject);
-        this.saveProjectProperties(projectList);
+        this.store.dispatch(new SaveProject());
+        this.store.dispatch(new SaveProjectList());
     }
 
     @Action(LoadProject) loadProject({ patchState }: StateContext<ProjectStateModel>, { payload }: LoadProject): void {
@@ -67,9 +70,32 @@ export class ProjectState {
             // file doesn't exist, do nothing
             if (err) return;
             // parse the data read from file
-            const project: Project = !!data ? JSON.parse(data) : null;
+            const projectSave: ProjectSave = !!data ? JSON.parse(data) : null;
             // patch th project list into the state
-            patchState({ project });
+            patchState({ project: projectSave.project, testState: projectSave.testState });
+        });
+    }
+
+    @Action(SaveProject) saveProject(context: StateContext<ProjectStateModel>): void {
+        // get the current state
+        const projectState: ProjectStateModel = context.getState();
+        // create the save payload
+        const savePayload: ProjectSave = { project: projectState.projectForm.model, testState: projectState.testState };
+        // save project to file
+        if (savePayload.project)
+            this.electronService.fs.writeFile(savePayload.project.path, JSON.stringify(savePayload), (err: NodeJS.ErrnoException) => {
+                // user cancelled or something failed, abort
+                // TODO handle errors
+            });
+    }
+
+    @Action(SaveProjectList) saveProjectList(context: StateContext<ProjectStateModel>): void {
+        // get the current state
+        const projectState: ProjectStateModel = context.getState();
+        // save project list to file
+        this.electronService.fs.writeFile(`${this.electronService.userDataPath()}\\${environment.projectsFileName}`, JSON.stringify(projectState.projectList), (err: NodeJS.ErrnoException) => {
+            // user cancelled or something failed, abort
+            // TODO handle errors
         });
     }
 
@@ -104,7 +130,7 @@ export class ProjectState {
             projectList: [...projectList]
         });
         // write the projects to file
-        this.saveProjectProperties(projectList);
+        this.store.dispatch(new SaveProjectList());
     }
 
     @Action(RemoveProject) removeProject(context: StateContext<ProjectStateModel>): void {
@@ -117,7 +143,7 @@ export class ProjectState {
             projectList
         });
         // write the projects to file
-        this.saveProjectProperties(projectList);
+        this.store.dispatch(new SaveProjectList());
         // load another project
         if (projectList.length) this.store.dispatch(new LoadProject(projectList[0]));
     }
@@ -131,23 +157,8 @@ export class ProjectState {
                 // update the project list
                 store.dispatch(new UpdateProjectList({ project }));
                 // write the project to file
-                this.saveProject(project);
+                this.store.dispatch(new SaveProject());
             }
-        });
-    }
-
-    private saveProject(project: Project): void {
-        const savePayload: Project | Object = project ? project : {};
-        this.electronService.fs.writeFile(project.path, JSON.stringify(savePayload), (err: NodeJS.ErrnoException) => {
-            // user cancelled or something failed, abort
-            // TODO handle errors
-        });
-    }
-
-    private saveProjectProperties(projects: Array<ProjectProperties>): void {
-        this.electronService.fs.writeFile(`${this.electronService.userDataPath()}\\${environment.projectsFileName}`, JSON.stringify(projects), (err: NodeJS.ErrnoException) => {
-            // user cancelled or something failed, abort
-            // TODO handle errors
         });
     }
 }

@@ -1,0 +1,41 @@
+<div class="clr-row clr-justify-content-between clr-align-items-center redbull-sidebar-heading">
+    <div class="clr-col-auto">
+        <h6>Tests</h6>
+    </div>
+    <div class="clr-col-auto">
+        <button type="button" class="btn btn-icon btn-link btn-sm" (click)="newTest()">
+            <clr-icon title="New test" shape="plus"></clr-icon>
+        </button>
+    </div>
+</div>
+
+<!-- Test / Section / Task tree view-->
+<clr-tree-node *ngFor="let test of testList$ | async; trackBy: trackByTest" [(clrExpanded)]="test.expanded">
+    <a [routerLink]="['/test/overview', test.id]" class="clr-treenode-link" routerLinkActive="active">{{ test.name }}</a>
+    <clr-tree-node *ngFor="let section of test.sections" [(clrExpanded)]="section.expanded">
+        <a [routerLink]="['/test/section', section.id]" class="clr-treenode-link" routerLinkActive="active">{{ section.name }}</a>
+        <clr-tree-node *ngFor="let task of section.tasks">
+            <a [routerLink]="['/test/task', task.id]" class="clr-treenode-link" routerLinkActive="active">{{ task.name }}</a>
+        </clr-tree-node>
+    </clr-tree-node>
+</clr-tree-node>
+
+<!-- Modal -->
+<clr-modal [(clrModalOpen)]="showNewTestModal">
+    <h3 class="modal-title">Select a Methodology</h3>
+    <div class="modal-body">
+        <p>Which methodology would you like to use for this test?</p>
+        <form [formGroup]="testForm" class="clr-form clr-form-horizontal">
+            <clr-select-container>
+                <label>Methodology</label>
+                <select clrSelect name="methodology" formControlName="methodology">
+                    <option *ngFor="let methodology of methodologyList$ | async; trackBy: trackByMethodology" [ngValue]="methodology.id">{{ methodology.name }}</option>
+                </select>
+            </clr-select-container>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="onModalCancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onModalCreate()">Create</button>
+    </div>
+</clr-modal>
