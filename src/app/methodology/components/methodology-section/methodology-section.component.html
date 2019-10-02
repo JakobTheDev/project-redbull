@@ -16,9 +16,5 @@
     </div>
 
     <!-- Tasks -->
-    <redbull-methodology-task
-        *ngFor="let task of sectionForm['controls'].tasks['controls']; let i = index; trackBy: task?.get('id').value"
-        [sectionForm]="sectionForm"
-        [taskForm]="task"
-    ></redbull-methodology-task>
+    <redbull-methodology-task *ngFor="let task of sectionForm['controls'].tasks['controls']; let i = index; trackBy: trackBy" [sectionForm]="sectionForm" [taskForm]="task"></redbull-methodology-task>
 </div>

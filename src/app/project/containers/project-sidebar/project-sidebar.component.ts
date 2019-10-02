@@ -5,6 +5,7 @@ import { ProjectState } from 'app/project/store/project.state';
 import { projectFileFilters } from 'app/shared/models/file-filters.model';
 import { Project, ProjectProperties } from 'app/shared/models/project.model';
 import { ElectronService } from 'app/shared/services/electron.service';
+import { SaveDialogReturnValue } from 'electron';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -26,17 +27,17 @@ export class ProjectSidebarComponent {
     }
 
     newProject(): void {
-        this.electronService.remote.dialog.showSaveDialog({ filters: projectFileFilters }, (fileName: any) => {
+        this.electronService.remote.dialog.showSaveDialog({ filters: projectFileFilters }).then((saveDialogReturnValue: SaveDialogReturnValue) => {
             // user cancelled or something failed, abort
-            if (fileName === undefined) {
-                return;
+            if (saveDialogReturnValue.canceled || saveDialogReturnValue.filePath === undefined) {
+                return undefined;
             }
             // create the new project file
-            this.electronService.fs.writeFile(fileName, '', (err: any) => {
+            this.electronService.fs.writeFile(saveDialogReturnValue.filePath, '', (err: any) => {
                 // user cancelled or something failed, abort
                 // TODO handle errors
                 // save new project to the store
-                this.store.dispatch(new NewProject({ path: fileName }));
+                this.store.dispatch(new NewProject({ path: saveDialogReturnValue.filePath }));
             });
         });
     }

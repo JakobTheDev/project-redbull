@@ -44,4 +44,11 @@ export class MethodologySectionComponent {
         // Add the new form to the FormArray
         (this.sectionForm.controls.tasks as FormArray).push(taskForm);
     }
+
+    /**
+     * trackBy function for the methodology tasks list
+     */
+    trackBy(index: number, taskForm: FormGroup): string {
+        return taskForm.controls.id.value;
+    }
 }

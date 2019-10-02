@@ -21,7 +21,7 @@
         "align": [false],
         "no-unnecessary-class": false,
         "import-blacklist": [true, "rxjs/Observable", "rxjs/Subject", "rxjs/add/*"],
-        "trackBy-function": { "severity": "warning" },
+        "template-use-track-by-function": { "severity": "warning" },
         "only-arrow-functions": false,
         "rxjs-finnish": {
             "options": [
@@ -35,12 +35,12 @@
             ],
             "severity": "error"
         },
-        "i18n": false,
+        "template-i18n": false,
         "no-object-literal-type-assertion": false,
         "no-floating-promises": false,
         "no-parameter-reassignment": false,
         "quotemark": [true, "single"],
         "no-import-side-effect": false,
-        "no-template-call-expression": false
+        "template-no-call-expression": false
     }
 }

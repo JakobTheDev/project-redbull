@@ -142,4 +142,11 @@ export class MethodologyDetailsComponent implements OnDestroy, OnInit {
             (this.methodologyForm.controls.sections as FormArray).removeAt(0);
         }
     }
+
+    /**
+     * trackBy function for the methodology sections list
+     */
+    trackBy(index: number, sectionForm: FormGroup): string {
+        return sectionForm.controls.id.value;
+    }
 }
