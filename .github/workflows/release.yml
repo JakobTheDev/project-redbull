@@ -1,31 +1,31 @@
 name: Release
 
 # Create a release on successful PR into master
-on: 
+on:
   pull_request:
     branches:
-      - master  
+      - master
 
 jobs:
   # Build the app
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
-    
+
     # Checkout the repo
     - uses: actions/checkout@v1
-    
+
     # Set up node.js
     - name: Use Node.js 10
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
         registry-url: 'https://registry.npmjs.org'
-    
+
     # Install dependencies
     - name: Install node.js dependencies
       run: npm install
-      
+
     # Build the app
     - name: Build - Windows
       run: npm run electron:windows
