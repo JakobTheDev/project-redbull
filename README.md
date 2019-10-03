@@ -1,10 +1,11 @@
 # Project RedBull
-![GitHub package.json version](https://img.shields.io/github/package-json/v/JakobRPennington/project-redbull)
-[![Build Status](https://travis-ci.com/JakobRPennington/project-redbull.svg?token=GLjYYizxibAhdwgYTTkB&branch=master)](https://travis-ci.com/JakobRPennington/project-redbull)
-[![Known Vulnerabilities](https://snyk.io/test/github/JakobRPennington/project-redbull/badge.svg)](https://snyk.io/test/github/JakobRPennington/project-redbull)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/JakobRPennington/project-redbull?style=flat-square)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
+[![Build Status](https://img.shields.io/travis/JakobRPennington/project-redbull.svg?style=flat-square)](https://travis-ci.com/JakobRPennington/project-redbull)
+[![Known Vulnerabilities](https://snyk.io/test/github/JakobRPennington/project-redbull/badge.svg?style=flat-square)](https://snyk.io/test/github/JakobRPennington/project-redbull)
 
-[![Angular](https://img.shields.io/badge/Angular-8.2.0-blue)](https://update.angular.io)
-[![node](https://img.shields.io/badge/node->10.9.0-blue)](https://nodejs.org/en/)
+[![Angular](https://img.shields.io/badge/Angular-8.2.0-blue?&style=flat-square)](https://update.angular.io)
+[![node](https://img.shields.io/badge/node->10.9.0-blue?&style=flat-square)](https://nodejs.org/en/)
 
 # Introduction
 

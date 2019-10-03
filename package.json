@@ -65,6 +65,9 @@
         "@angular/router": "8.2.8",
         "@ngx-translate/core": "11.0.1",
         "@ngx-translate/http-loader": "4.0.0",
+        "@semantic-release/commit-analyzer": "^6.3.0",
+        "@semantic-release/github": "^5.5.0",
+        "@semantic-release/release-notes-generator": "^7.3.0",
         "@types/jasmine": "2.8.7",
         "@types/jasminewd2": "2.0.3",
         "@types/mocha": "^5.2.6",
@@ -138,5 +141,26 @@
             "commit-msg": "validate-commit-msg",
             "pre-commit": "lint-staged"
         }
+    },
+    "release": {
+        "branch": "master",
+        "repositoryUrl": "https://github.com/JakobRPennington/project-redbull",
+        "plugins": [
+            [
+                "@semantic-release/github",
+                {
+                    "assets": [
+                        {
+                            "path": "dist/*.exe",
+                            "label": "Windows App"
+                        },
+                        {
+                            "path": "release/*.AppImage",
+                            "label": "Linux App"
+                        }
+                    ]
+                }
+            ]
+        ]
     }
 }
