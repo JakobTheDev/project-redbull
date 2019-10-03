@@ -13,8 +13,8 @@ install:
 script:
   - ng lint
   - npm run test
-  - npm npm run electron:windows
-  - npm npm run electron:linux
+  - npm run electron:windows
+  - npm run electron:linux
 # Only runs on master update
 # Version bump, generate changelog
 before_deploy:
