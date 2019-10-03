@@ -1,6 +1,12 @@
 language: node_js
+os: windows
 node_js:
     - '10'
+# Only build for merge into develop or master
+branches:
+  only:
+  - master
+  - develop
 # Install dependencies
 install:
   - npm install
@@ -8,7 +14,8 @@ install:
 script:
   - ng lint
   - npm run test
-  - npm run build
+  - npm run electron:windows
+  - npm run electron:linux
 # Only runs on master update
 # Version bump, generate changelog
 before_deploy:
