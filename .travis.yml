@@ -1,12 +1,13 @@
+# We want to trigger on PR to develop, but need to trigger on push to master so deploy steps are run
+if: (type = pull_request AND branch = develop) OR (type = pull_request AND branch = master)
+
+# Config
 language: node_js
 os: windows
 node_js:
     - '10'
-# Only build for merge into develop or master
-branches:
-  only:
-  - master
-  - develop
+
+# Start of pipeline
 # Install dependencies
 install:
   - npm install
