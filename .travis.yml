@@ -20,7 +20,7 @@ script:
 # Only runs on master update
 # Version bump, generate changelog
 before_deploy:
-  - semantic-release
+  - npx semantic-release --debug
 # Create a release on GitHub
 deploy:
   provider: releases

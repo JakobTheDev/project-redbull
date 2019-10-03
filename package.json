@@ -36,7 +36,8 @@
         "test": "snyk test",
         "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
         "precommit": "lint-staged",
-        "commit": "git-cz"
+        "commit": "git-cz",
+        "release": "semantic-release"
     },
     "dependencies": {
         "@angular/animations": "^8.2.8",
