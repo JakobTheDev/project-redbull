@@ -1,5 +1,5 @@
-# We want to trigger on PR to develop, but need to trigger on push to master so deploy steps are run
-if: (type = pull_request AND branch = develop) OR (type = push AND branch = master)
+# We want to trigger on PR, but need to trigger on push to master so deploy steps are run
+if: type = pull_request OR (type = push AND branch = master)
 
 # Config
 language: node_js
